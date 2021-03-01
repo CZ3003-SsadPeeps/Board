@@ -35,4 +35,10 @@ public class Board : MonoBehaviour
             tileList.Add(tile);
         }
     }
+
+    internal Tile MovePiece(int diceValue)
+    {
+        // TODO: Move piece object & update its position on the board
+        return tileList[0];
+    }
 }

@@ -44,9 +44,21 @@ public class GameUi : MonoBehaviour
     public void OnRollDiceButtonClick()
     {
         int diceValue = controller.GenerateDiceValue();
+
+        // Display dice value
         Debug.Log($"Dice value = {diceValue}");
         rollDiceButton.GetComponentInChildren<Text>().text = diceValue.ToString();
         StartCoroutine(ResetRollDiceButtonText());
+
+        // Inform board to move piece
+        Tile landedTile = board.MovePiece(diceValue);
+
+        // Check if player has passed GO
+        // If so, add to player credit & display popup
+
+        // Check tile type & launch relevant event
+        // For now it's a random check to see if we indeed get a Tile object
+        Debug.Log($"Max players on tile = {landedTile.playerOnTileArr.Length}");
     }
 
     private IEnumerator ResetRollDiceButtonText()
