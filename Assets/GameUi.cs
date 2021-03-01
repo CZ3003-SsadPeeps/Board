@@ -44,5 +44,6 @@ public class GameUi : MonoBehaviour
     {
         int diceValue = controller.GenerateDiceValue();
         Debug.Log($"Dice value = {diceValue}");
+        rollDiceButton.GetComponentInChildren<Text>().text = diceValue.ToString();
     }
 }
