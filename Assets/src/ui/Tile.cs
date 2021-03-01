@@ -5,22 +5,17 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public TileType Type;
-    private List<Piece> pieces = new List<Piece>(4);
+    public int NumFreeSpace { get; private set; } = 4;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Piece") return;
-        pieces.Add(other.GetComponentInParent<Piece>());
+        if (!other.gameObject.tag.Contains("Player")) return;
+        NumFreeSpace--;
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag != "Piece") return;
-        pieces.RemoveAt(0);
-    }
-
-    public int freeSpace()
-    {
-        return pieces.Count < 4 ? pieces.Count : 0;
+        if (!other.gameObject.tag.Contains("Player")) return;
+        NumFreeSpace++;
     }
 }
