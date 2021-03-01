@@ -21,6 +21,12 @@ public class Board : MonoBehaviour
         StartCoroutine(EnumMove(diceValue));
     }
 
+    internal Tile getCurrentTile()
+    {
+        int boardPos = pieces[currentPieceIndex].BoardPos;
+        return tiles[boardPos];
+    }
+
     internal bool hasReachedMaxLaps()
     {
         return pieces[currentPieceIndex].NumLaps >= MAX_LAPS;
