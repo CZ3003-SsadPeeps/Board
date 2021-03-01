@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameControl : MonoBehaviour
+public class GameUi : MonoBehaviour
 {
     Player[] playerObjects;
     public List<Player> playerList = new List<Player>();
@@ -10,7 +10,7 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
-        playerObjects = GameControl.FindObjectsOfType<Player>();
+        playerObjects = GameUi.FindObjectsOfType<Player>();
 
         playerTurn = 0;
 
