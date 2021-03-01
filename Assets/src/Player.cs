@@ -1,4 +1,4 @@
-﻿public class Player
+﻿class Player
 {
     public string Name { get; }
     public int Credit { get; private set; } = 1024;
