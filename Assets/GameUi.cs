@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUi : MonoBehaviour
 {
+    // UI Components
+    public Button rollDiceButton;
+
     private GameController controller = new GameController();
     Player[] playerObjects;
     public List<Player> playerList = new List<Player>();
