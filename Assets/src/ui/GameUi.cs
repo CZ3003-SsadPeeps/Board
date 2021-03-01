@@ -8,6 +8,11 @@ public class GameUi : MonoBehaviour
 
     private GameController controller = new GameController();
 
+    void Start()
+    {
+        controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
