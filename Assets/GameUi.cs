@@ -35,4 +35,10 @@ public class GameUi : MonoBehaviour
             playerTurn %= 4;
         }
     }
+
+    public void OnRollDiceButtonClick()
+    {
+        int diceValue = controller.GenerateDiceValue();
+        Debug.Log($"Dice value = {diceValue}");
+    }
 }
