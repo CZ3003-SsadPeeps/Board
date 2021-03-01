@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    int numLaps = 0;
+    public int NumLaps { get; private set; } = 0;
     public int BoardPos { get; private set; } = 0;
 
     internal void UpdateBoardPos(int numTilesMoved)
     {
-        BoardPos += numTilesMoved;
+        int prevBoardPos = BoardPos;
+        BoardPos = (BoardPos + numTilesMoved) % 12;
+        if (BoardPos < prevBoardPos) NumLaps++;
     }
 
     //public void Move()
