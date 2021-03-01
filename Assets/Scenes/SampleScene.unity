@@ -2299,5 +2299,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8130828053e87084f98ca719f03681d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieces: []
-  tileObjects: []
+  pieces:
+  - {fileID: 1770511845}
+  - {fileID: 177717104}
+  - {fileID: 1874405520}
+  - {fileID: 22396645}
+  tileObjects:
+  - {fileID: 1851884069}
+  - {fileID: 1119726028}
+  - {fileID: 1790787167}
+  - {fileID: 1088579766}
+  - {fileID: 1669244475}
+  - {fileID: 1490879332}
+  - {fileID: 1936485740}
+  - {fileID: 1965914761}
+  - {fileID: 284975832}
+  - {fileID: 1581733198}
+  - {fileID: 495194579}
+  - {fileID: 708827058}
