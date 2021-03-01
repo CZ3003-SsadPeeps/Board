@@ -45,20 +45,7 @@ public class Board : MonoBehaviour
             nextTile = tiles[currentBoardPos];
 
             // Get final position
-            Vector3 nextPos = nextTile.gameObject.transform.position;
-            // Account for possible collision with other pieces on the tile
-            switch (nextTile.NumPiecesOnTile)
-            {
-                case 1:
-                    nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z + 0.2f);
-                    break;
-                case 2:
-                    nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z - 0.2f);
-                    break;
-                case 3:
-                    nextPos.Set(nextPos.x - 0.2f, 0, nextPos.z + 0.2f);
-                    break;
-            }
+            Vector3 nextPos = nextTile.GetEmptySlotForPiece(currentPiece);
 
             // Perform movement
             while (MoveToNextTile(currentPiece, nextPos))
