@@ -5,68 +5,68 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
 
-    public Board currentBoard;
+    //public Board currentBoard;
 
-    int boardPosition;
+    //int boardPosition;
 
-    public int steps;
+    //public int steps;
 
-    bool isMoving;
+    //bool isMoving;
 
-    public void Move()
-    {
-        if (!isMoving)
-        {
-            steps = Random.Range(1, 7);
-            Debug.Log("Dice rolled " + steps + ", Current Position " + boardPosition + ", Next Position " + ((boardPosition + steps) % currentBoard.tileList.Count));
-            StartCoroutine(EnumMove());
-        }
-    }
+    //public void Move()
+    //{
+    //    if (!isMoving)
+    //    {
+    //        steps = Random.Range(1, 7);
+    //        Debug.Log("Dice rolled " + steps + ", Current Position " + boardPosition + ", Next Position " + ((boardPosition + steps) % currentBoard.tileList.Count));
+    //        StartCoroutine(EnumMove());
+    //    }
+    //}
 
-    IEnumerator EnumMove()
-    {
-        if (isMoving)
-        {
-            yield break;
-        }
+    //IEnumerator EnumMove()
+    //{
+    //    if (isMoving)
+    //    {
+    //        yield break;
+    //    }
 
-        isMoving = true;
+    //    isMoving = true;
 
-        while (steps > 0)
-        {
-            boardPosition++;
-            boardPosition %= currentBoard.tileList.Count;
+    //    while (steps > 0)
+    //    {
+    //        boardPosition++;
+    //        boardPosition %= currentBoard.tileList.Count;
 
-            Vector3 nextPos = currentBoard.tileList[boardPosition].gameObject.transform.position;
+    //        Vector3 nextPos = currentBoard.tileList[boardPosition].gameObject.transform.position;
 
-            switch (currentBoard.tileList[boardPosition].freeSpace())
-            {
-                case 1:
-                    nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z + 0.2f);
-                    break;
-                case 2:
-                    nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z - 0.2f);
-                    break;
-                case 3:
-                    nextPos.Set(nextPos.x - 0.2f, 0, nextPos.z + 0.2f);
-                    break;
-            }
+    //        switch (currentBoard.tileList[boardPosition].freeSpace())
+    //        {
+    //            case 1:
+    //                nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z + 0.2f);
+    //                break;
+    //            case 2:
+    //                nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z - 0.2f);
+    //                break;
+    //            case 3:
+    //                nextPos.Set(nextPos.x - 0.2f, 0, nextPos.z + 0.2f);
+    //                break;
+    //        }
 
-            while (MoveToNextTile(nextPos))
-            {
-                yield return null;
-            }
+    //        while (MoveToNextTile(nextPos))
+    //        {
+    //            yield return null;
+    //        }
 
-            yield return new WaitForSeconds(0.15f);
+    //        yield return new WaitForSeconds(0.15f);
 
-            steps--;
-        }
+    //        steps--;
+    //    }
 
-        isMoving = false;
-    }
+    //    isMoving = false;
+    //}
 
-    bool MoveToNextTile(Vector3 target)
-    {
-        return target != (transform.position = Vector3.MoveTowards(transform.position, target, 2f * Time.deltaTime));
-    }
+    //bool MoveToNextTile(Vector3 target)
+    //{
+    //    return target != (transform.position = Vector3.MoveTowards(transform.position, target, 2f * Time.deltaTime));
+    //}
 }

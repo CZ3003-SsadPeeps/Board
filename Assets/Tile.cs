@@ -4,50 +4,22 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Event Event;
-
-    public Player[] playerOnTileArr = new Player[4];
+    private List<Piece> pieces = new List<Piece>(4);
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            for (int i = 0; i < playerOnTileArr.Length; i++)
-            {
-                if (playerOnTileArr[i] == null)
-                {
-                    playerOnTileArr[i] = other.GetComponentInParent<Player>();
-                    break;
-                }
-            }
-        }
+        if (other.gameObject.tag != "Piece") return;
+        pieces.Add(other.GetComponentInParent<Piece>());
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            for (int i = 0; i < playerOnTileArr.Length; i++)
-            {
-                if (playerOnTileArr[i] == other.GetComponentInParent<Player>())
-                {
-                    playerOnTileArr[i] = null;
-                    break;
-                }
-            }
-        }
+        if (other.gameObject.tag != "Piece") return;
+        pieces.RemoveAt(0);
     }
 
     public int freeSpace()
     {
-        for (int i = 0; i < playerOnTileArr.Length; i++)
-        {
-            if (playerOnTileArr[i] == null)
-            {
-                return i;
-            }
-        }
-
-        return 0;
+        return pieces.Count < 4 ? pieces.Count : 0;
     }
 }

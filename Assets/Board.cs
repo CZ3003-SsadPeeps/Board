@@ -4,35 +4,27 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-
-    Tile[] tileObjects;
-    public List<Tile> tileList = new List<Tile>();
+    public Piece[] pieces;
+    public Tile[] tileObjects;
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        FillTiles();
 
-        for (int i = 0; i < tileList.Count; i++)
+        for (int i = 0; i < tileObjects.Length; i++)
         {
-            Vector3 currentPos = tileList[i].gameObject.transform.position;
+            Vector3 currentPos = tileObjects[i].gameObject.transform.position;
 
             if (i > 0)
             {
-                Vector3 previousPos = tileList[i - 1].gameObject.transform.position;
+                Vector3 previousPos = tileObjects[i - 1].gameObject.transform.position;
                 Gizmos.DrawLine(previousPos, currentPos);
             }
         }
     }
 
-    void FillTiles()
+    internal void MovePiece()
     {
-        tileList.Clear();
-        tileObjects = GetComponentsInChildren<Tile>();
 
-        foreach (Tile tile in tileObjects)
-        {
-            tileList.Add(tile);
-        }
     }
 }

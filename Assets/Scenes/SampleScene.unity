@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 22396646}
   - component: {fileID: 22396645}
   m_Layer: 0
-  m_Name: Piece
+  m_Name: Piece 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 177717105}
   - component: {fileID: 177717104}
   m_Layer: 0
-  m_Name: Piece
+  m_Name: Piece 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,8 +454,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4795fb0e6d0ba7d43845be04b4395d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerList: []
-  playerTurn: 0
+  pieces:
+  - {fileID: 1770511845}
+  - {fileID: 177717104}
+  - {fileID: 1874405520}
+  - {fileID: 22396645}
 --- !u!4 &604905983
 Transform:
   m_ObjectHideFlags: 0
@@ -1625,7 +1628,7 @@ GameObject:
   - component: {fileID: 1770511846}
   - component: {fileID: 1770511845}
   m_Layer: 0
-  m_Name: Piece
+  m_Name: Piece 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1883,7 +1886,7 @@ GameObject:
   - component: {fileID: 1874405521}
   - component: {fileID: 1874405520}
   m_Layer: 0
-  m_Name: Piece
+  m_Name: Piece 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
