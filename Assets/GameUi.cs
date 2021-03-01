@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameUi : MonoBehaviour
 {
     // UI Components
+    public Board board;
     public Button rollDiceButton;
 
     private GameController controller = new GameController();
