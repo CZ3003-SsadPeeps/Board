@@ -30,6 +30,15 @@ public class GameUi : MonoBehaviour
             // TODO: Move to Roll Dice click event
             int diceValue = controller.GenerateDiceValue();
             board.MovePiece(diceValue);
+
+            // TODO: Move to End Turn click event
+            bool shouldShowNews = controller.NextTurn();
+            if (shouldShowNews)
+            {
+                // TODO: Display news
+            }
+
+            LoadCurrentPlayerDetails();
         }
     }
 }

@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4795fb0e6d0ba7d43845be04b4395d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 0}
+  board: {fileID: 2060646578}
 --- !u!4 &604905983
 Transform:
   m_ObjectHideFlags: 0
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   - {fileID: 177717104}
   - {fileID: 1874405520}
   - {fileID: 22396645}
-  tileObjects:
+  tiles:
   - {fileID: 1851884069}
   - {fileID: 1119726028}
   - {fileID: 1790787167}

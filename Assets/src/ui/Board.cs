@@ -16,15 +16,56 @@ public class Board : MonoBehaviour
         currentPieceIndex = index;
     }
 
-    internal int MovePiece(int diceValue)
+    internal void MovePiece(int diceValue)
     {
-        // TODO: Replace with actual logic
-        return 0;
+        StartCoroutine(EnumMove(diceValue));
     }
 
     internal bool hasReachedMaxLaps()
     {
         return pieces[currentPieceIndex].NumLaps >= MAX_LAPS;
+    }
+
+    IEnumerator EnumMove(int numSteps)
+    {
+        Debug.Log("++ EnumMove ++");
+        Piece currentPiece = pieces[currentPieceIndex];
+        int currentBoardPos = currentPiece.BoardPos;
+
+        Tile nextTile;
+        for (int i = 0; i < numSteps; i++)
+        {
+            currentBoardPos = (currentBoardPos + 1) % tiles.Length;
+            nextTile = tiles[currentBoardPos];
+
+            Vector3 nextPos = nextTile.gameObject.transform.position;
+            switch (nextTile.freeSpace())
+            {
+                case 1:
+                    nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z + 0.2f);
+                    break;
+                case 2:
+                    nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z - 0.2f);
+                    break;
+                case 3:
+                    nextPos.Set(nextPos.x - 0.2f, 0, nextPos.z + 0.2f);
+                    break;
+            }
+
+            while (MoveToNextTile(currentPiece, nextPos))
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        yield break;
+    }
+
+    bool MoveToNextTile(Piece piece, Vector3 target)
+    {
+        return target != (piece.transform.position = Vector3.MoveTowards(piece.transform.position, target, 2f * Time.deltaTime));
     }
 
     void OnDrawGizmos()
