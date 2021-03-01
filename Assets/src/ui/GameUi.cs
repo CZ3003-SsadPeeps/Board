@@ -15,14 +15,21 @@ public class GameUi : MonoBehaviour
 
     void LoadCurrentPlayerDetails()
     {
-        Debug.Log($"{controller.CurrentPlayer.Name} at position {controller.CurrentPlayerPos} playing now");
+        // Get player details & display them
+        Player currentPlayer = controller.CurrentPlayer;
+        Debug.Log($"{currentPlayer.Name} at position {controller.CurrentPlayerPos} playing now");
+
+        // Select player's piece
+        board.SetSelectedPiece(controller.CurrentPlayerPos);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            board.MovePiece();
+            // TODO: Move to Roll Dice click event
+            int diceValue = controller.GenerateDiceValue();
+            board.MovePiece(diceValue);
         }
     }
 }
