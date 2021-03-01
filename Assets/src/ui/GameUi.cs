@@ -6,6 +6,8 @@ public class GameUi : MonoBehaviour
 {
     public Board board;
 
+    private GameController controller = new GameController();
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
