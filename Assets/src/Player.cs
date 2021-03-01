@@ -8,7 +8,7 @@
         this.Name = name;
     }
 
-    public void addCredit(int amount)
+    public void AddCredit(int amount)
     {
         Credit += amount;
     }
