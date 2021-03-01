@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
+    int numLaps = 0;
+    public int BoardPos { get; private set; } = 0;
 
-    //public Board currentBoard;
-
-    //int boardPosition;
-
-    //public int steps;
-
-    //bool isMoving;
+    internal void UpdateBoardPos(int numTilesMoved)
+    {
+        BoardPos += numTilesMoved;
+    }
 
     //public void Move()
     //{
