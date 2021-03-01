@@ -24,8 +24,7 @@ public class Board : MonoBehaviour
 
     internal bool hasReachedMaxLaps()
     {
-        // TODO: Replace with actual logic
-        return false;
+        return pieces[currentPieceIndex].NumLaps >= MAX_LAPS;
     }
 
     void OnDrawGizmos()
