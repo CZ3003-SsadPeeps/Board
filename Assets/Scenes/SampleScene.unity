@@ -150,8 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45bb713ad013bd944b7ee6d01aa7e190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBoard: {fileID: 2060646578}
-  steps: 0
 --- !u!4 &22396646
 Transform:
   m_ObjectHideFlags: 0
@@ -196,8 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45bb713ad013bd944b7ee6d01aa7e190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBoard: {fileID: 2060646578}
-  steps: 0
 --- !u!4 &177717105
 Transform:
   m_ObjectHideFlags: 0
@@ -227,7 +223,7 @@ GameObject:
   - component: {fileID: 284975829}
   - component: {fileID: 284975832}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &495194574
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +330,7 @@ GameObject:
   - component: {fileID: 495194576}
   - component: {fileID: 495194579}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,6 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &604905981
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,11 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4795fb0e6d0ba7d43845be04b4395d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieces:
-  - {fileID: 1770511845}
-  - {fileID: 177717104}
-  - {fileID: 1874405520}
-  - {fileID: 22396645}
+  board: {fileID: 0}
 --- !u!4 &604905983
 Transform:
   m_ObjectHideFlags: 0
@@ -579,7 +573,7 @@ GameObject:
   - component: {fileID: 708827055}
   - component: {fileID: 708827058}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -671,6 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &849715536
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +985,7 @@ GameObject:
   - component: {fileID: 1088579763}
   - component: {fileID: 1088579766}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Quiz Tile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1082,6 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &1119726023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,7 +1092,7 @@ GameObject:
   - component: {fileID: 1119726025}
   - component: {fileID: 1119726028}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1188,6 +1184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &1132405832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1310,7 @@ GameObject:
   - component: {fileID: 1490879329}
   - component: {fileID: 1490879332}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1405,6 +1402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &1581733193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,7 +1417,7 @@ GameObject:
   - component: {fileID: 1581733195}
   - component: {fileID: 1581733198}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Quiz Tile 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1511,6 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &1669244470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,7 +1524,7 @@ GameObject:
   - component: {fileID: 1669244472}
   - component: {fileID: 1669244475}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1617,6 +1616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &1770511844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,8 +1646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45bb713ad013bd944b7ee6d01aa7e190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBoard: {fileID: 2060646578}
-  steps: 0
 --- !u!4 &1770511846
 Transform:
   m_ObjectHideFlags: 0
@@ -1677,7 +1675,7 @@ GameObject:
   - component: {fileID: 1790787164}
   - component: {fileID: 1790787167}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1769,6 +1767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &1851884064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,7 +1782,7 @@ GameObject:
   - component: {fileID: 1851884066}
   - component: {fileID: 1851884069}
   m_Layer: 0
-  m_Name: Go Tile
+  m_Name: GO Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1875,6 +1874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 2
 --- !u!1 &1874405519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,8 +1904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45bb713ad013bd944b7ee6d01aa7e190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBoard: {fileID: 2060646578}
-  steps: 0
 --- !u!4 &1874405521
 Transform:
   m_ObjectHideFlags: 0
@@ -2046,7 +2044,7 @@ GameObject:
   - component: {fileID: 1936485737}
   - component: {fileID: 1936485740}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Quiz Tile 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2138,6 +2136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &1965914756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,7 +2151,7 @@ GameObject:
   - component: {fileID: 1965914758}
   - component: {fileID: 1965914761}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Event Tile 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2244,6 +2243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9579307dd18e38a429b920410516a311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &2060646576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,16 +2299,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8130828053e87084f98ca719f03681d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileList:
-  - {fileID: 1851884069}
-  - {fileID: 1119726028}
-  - {fileID: 1790787167}
-  - {fileID: 1088579766}
-  - {fileID: 1669244475}
-  - {fileID: 1490879332}
-  - {fileID: 1936485740}
-  - {fileID: 1965914761}
-  - {fileID: 284975832}
-  - {fileID: 1581733198}
-  - {fileID: 495194579}
-  - {fileID: 708827058}
+  pieces: []
+  tileObjects: []

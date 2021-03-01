@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public TileType Type;
     private List<Piece> pieces = new List<Piece>(4);
 
     void OnTriggerEnter(Collider other)
