@@ -5,17 +5,17 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public TileType Type;
-    public int NumFreeSpace { get; private set; } = 4;
+    public int NumPiecesOnTile { get; private set; } = 0;
 
     void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.tag.Contains("Player")) return;
-        NumFreeSpace--;
+        NumPiecesOnTile++;
     }
 
     void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.tag.Contains("Player")) return;
-        NumFreeSpace++;
+        NumPiecesOnTile--;
     }
 }

@@ -38,15 +38,15 @@ public class Board : MonoBehaviour
             nextTile = tiles[currentBoardPos];
 
             Vector3 nextPos = nextTile.gameObject.transform.position;
-            switch (nextTile.NumFreeSpace)
+            switch (nextTile.NumPiecesOnTile)
             {
-                case 3:
+                case 1:
                     nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z + 0.2f);
                     break;
                 case 2:
                     nextPos.Set(nextPos.x + 0.2f, 0, nextPos.z - 0.2f);
                     break;
-                case 1:
+                case 3:
                     nextPos.Set(nextPos.x - 0.2f, 0, nextPos.z + 0.2f);
                     break;
             }
