@@ -18,6 +18,7 @@ public class Board : MonoBehaviour
 
     internal void MovePiece(int diceValue)
     {
+        Debug.Log($"Moving {diceValue} steps");
         StartCoroutine(EnumMove(diceValue));
     }
 
@@ -28,7 +29,6 @@ public class Board : MonoBehaviour
 
     IEnumerator EnumMove(int numSteps)
     {
-        Debug.Log("++ EnumMove ++");
         Piece currentPiece = pieces[currentPieceIndex];
         int currentBoardPos = currentPiece.BoardPos;
 
@@ -60,6 +60,7 @@ public class Board : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
 
+        currentPiece.UpdateBoardPos(numSteps);
         yield break;
     }
 
