@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameUi : MonoBehaviour
 {
+    private GameController controller = new GameController();
     Player[] playerObjects;
     public List<Player> playerList = new List<Player>();
     public int playerTurn;
