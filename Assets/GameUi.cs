@@ -45,5 +45,17 @@ public class GameUi : MonoBehaviour
         int diceValue = controller.GenerateDiceValue();
         Debug.Log($"Dice value = {diceValue}");
         rollDiceButton.GetComponentInChildren<Text>().text = diceValue.ToString();
+        StartCoroutine(ResetRollDiceButtonText());
+    }
+
+    private IEnumerator ResetRollDiceButtonText()
+    {
+        // Wait for 3 seconds
+        yield return new WaitForSeconds(3);
+
+        rollDiceButton.GetComponentInChildren<Text>().text = "Roll Dice";
+
+        // Stop this coroutine, otherwise will loop forever
+        yield break;
     }
 }
