@@ -18,7 +18,6 @@ public class Board : MonoBehaviour
 
     internal void MovePiece(int diceValue)
     {
-        Debug.Log($"Moving {diceValue} steps");
         StartCoroutine(EnumMove(diceValue));
     }
 
