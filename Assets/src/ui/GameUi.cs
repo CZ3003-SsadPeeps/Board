@@ -13,6 +13,11 @@ public class GameUi : MonoBehaviour
         controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
     }
 
+    void LoadCurrentPlayerDetails()
+    {
+        Debug.Log($"{controller.CurrentPlayer.Name} at position {controller.CurrentPlayerPos} playing now");
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
