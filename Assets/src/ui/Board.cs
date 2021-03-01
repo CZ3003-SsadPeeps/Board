@@ -40,10 +40,13 @@ public class Board : MonoBehaviour
         Tile nextTile;
         for (int i = 0; i < numSteps; i++)
         {
+            // Get next tile to move to
             currentBoardPos = (currentBoardPos + 1) % tiles.Length;
             nextTile = tiles[currentBoardPos];
 
+            // Get final position
             Vector3 nextPos = nextTile.gameObject.transform.position;
+            // Account for possible collision with other pieces on the tile
             switch (nextTile.NumPiecesOnTile)
             {
                 case 1:
@@ -57,12 +60,13 @@ public class Board : MonoBehaviour
                     break;
             }
 
+            // Perform movement
             while (MoveToNextTile(currentPiece, nextPos))
             {
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         currentPiece.UpdateBoardPos(numSteps);
