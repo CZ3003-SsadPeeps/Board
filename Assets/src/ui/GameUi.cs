@@ -57,27 +57,19 @@ public class GameUi : MonoBehaviour
         {
             // TODO: Disable all buttons except leaderboard & back
             controller.SavePlayerScores();
-
-            // TODO: Display all players score
-            Player[] players = controller.Players;
-            foreach (Player player in players)
-            {
-                Debug.Log($"Player[{player.Name}, ${player.Credit}]");
-            }
+            DisplayFinalScores();
 
             return;
         }
 
-            bool shouldShowNews = controller.NextTurn();
-
+        bool shouldShowNews = controller.NextTurn();
         if (shouldShowNews) DisplayNews();
 
         LoadCurrentPlayerDetails();
-
         rollDiceButton.interactable = true;
     }
 
-    void DisplayNews() {}
+    void DisplayNews() { }
 
     // [NOTE] This function corresponds to clicking the end game button. This is NOT the same as
     // the first player reaching 14 laps
@@ -87,7 +79,15 @@ public class GameUi : MonoBehaviour
         Debug.Log("Ending game...");
     }
 
-    void DisplayFinalScores() {}
+    void DisplayFinalScores()
+    {
+        // TODO: Display all players score
+        Player[] players = controller.Players;
+        foreach (Player player in players)
+        {
+            Debug.Log($"Player[{player.Name}, ${player.Credit}]");
+        }
+    }
 
     void ShowLeaderBoard()
     {
