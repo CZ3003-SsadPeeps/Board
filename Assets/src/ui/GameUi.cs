@@ -69,7 +69,11 @@ public class GameUi : MonoBehaviour
         rollDiceButton.interactable = true;
     }
 
-    void DisplayNews() { }
+    void DisplayNews()
+    {
+        // TODO: Show news UI
+        Debug.Log("Launching news UI...");
+    }
 
     // [NOTE] This function corresponds to clicking the end game button. This is NOT the same as
     // the first player reaching 14 laps
