@@ -18,7 +18,6 @@ public class GameUi : MonoBehaviour
 
     public void RollDice()
     {
-        // TODO: Disable clicks on roll dice button
         StartCoroutine(PerformDiceRoll());
     }
 
@@ -66,7 +65,7 @@ public class GameUi : MonoBehaviour
 
         LoadCurrentPlayerDetails();
 
-        // TODO: Enable clicks on roll dice button
+        rollDiceButton.interactable = true;
     }
 
     void DisplayNews() {}
@@ -88,6 +87,8 @@ public class GameUi : MonoBehaviour
     // Must be performed in coroutine to wait for piece to move before performing additional operations
     IEnumerator PerformDiceRoll()
     {
+        rollDiceButton.interactable = false;
+
         int diceValue = controller.GenerateDiceValue();
         rollDiceButton.GetComponentInChildren<Text>().text = diceValue.ToString();
 
