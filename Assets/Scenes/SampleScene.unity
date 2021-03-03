@@ -453,7 +453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 2060646578}
-  rollDiceButton: {fileID: 1162998037}
 --- !u!4 &604905983
 Transform:
   m_ObjectHideFlags: 0
@@ -1545,7 +1544,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 604905982}
-        m_MethodName: OnRollDiceButtonClick
+        m_MethodName: RollDice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -14,13 +14,10 @@ public class GameUi : MonoBehaviour
         controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
     }
 
-    void Update()
+    public void RollDice()
     {
-        // TODO: Remove when roll dice button is implemented
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RollDice();
-        }
+        // TODO: Disable clicks on roll dice button
+        StartCoroutine(PerformDiceRoll());
     }
 
     void LoadCurrentPlayerDetails()
@@ -32,12 +29,6 @@ public class GameUi : MonoBehaviour
         board.SetSelectedPiece(controller.CurrentPlayerPos);
 
         // TODO: Disable clicks on end turn button
-    }
-
-    void RollDice()
-    {
-        // TODO: Disable clicks on roll dice button
-        StartCoroutine(PerformDiceRoll());
     }
 
     void OnQuizTileActivated()
