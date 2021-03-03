@@ -15,6 +15,7 @@ public class GameUi : MonoBehaviour
 
     void Update()
     {
+        // TODO: Remove when roll dice button is implemented
         if (Input.GetKeyDown(KeyCode.Space))
         {
             RollDice();
@@ -23,15 +24,18 @@ public class GameUi : MonoBehaviour
 
     void LoadCurrentPlayerDetails()
     {
-        // Get player details & display them
+        // TODO: Display player details
         Player currentPlayer = controller.CurrentPlayer;
 
         // Select player's piece
         board.SetSelectedPiece(controller.CurrentPlayerPos);
+
+        // TODO: Disable clicks on end turn button
     }
 
     void RollDice()
     {
+        // TODO: Disable clicks on roll dice button
         StartCoroutine(PerformDiceRoll());
     }
 
@@ -56,6 +60,8 @@ public class GameUi : MonoBehaviour
         if (shouldShowNews) DisplayNews();
 
         LoadCurrentPlayerDetails();
+
+        // TODO: Enable clicks on roll dice button
     }
 
     void DisplayNews() {}
@@ -78,8 +84,31 @@ public class GameUi : MonoBehaviour
         int diceValue = controller.GenerateDiceValue();
         yield return StartCoroutine(board.MovePiece(diceValue));
 
+        // Check if piece landed or passed through GO tile
+        int currentPiecePos = board.GetCurrentPiecePos();
+        if (currentPiecePos < diceValue)
+        {
+            controller.IssueGoPayout();
+            // TODO: Display GO payout
+        }
+
+        // Launch tile event if needed
+        Tile currentTile = board.tiles[currentPiecePos];
+        // No need check for GO tile. Already handled by code above
+        switch (currentTile.Type)
+        {
+            case TileType.Quiz:
+                OnQuizTileActivated();
+                break;
+            case TileType.Event:
+                OnEventTileActivated();
+                break;
+        }
+
         // TODO: Remove when end turn button is implemented
         EndTurn();
+
+        // TODO: Enable clicks on end turn button
 
         yield break;
     }

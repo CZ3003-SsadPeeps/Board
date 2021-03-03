@@ -22,7 +22,7 @@ public class Board : MonoBehaviour
         int currentBoardPos = currentPiece.BoardPos;
 
         Tile nextTile;
-        for (int i = 0; i < numSteps; i++)
+        for (int i = 0; i < diceValue; i++)
         {
             // Get next tile to move to
             currentBoardPos = (currentBoardPos + 1) % tiles.Length;
@@ -40,17 +40,16 @@ public class Board : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        currentPiece.UpdateBoardPos(numSteps);
+        currentPiece.UpdateBoardPos(diceValue);
         yield break;
     }
 
-    internal Tile getCurrentTile()
+    internal int GetCurrentPiecePos()
     {
-        int boardPos = pieces[currentPieceIndex].BoardPos;
-        return tiles[boardPos];
+        return pieces[currentPieceIndex].BoardPos;
     }
 
-    internal bool hasReachedMaxLaps()
+    internal bool HasReachedMaxLaps()
     {
         return pieces[currentPieceIndex].NumLaps >= MAX_LAPS;
     }
