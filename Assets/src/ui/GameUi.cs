@@ -10,6 +10,7 @@ public class GameUi : MonoBehaviour
 
     void Start()
     {
+        // TODO: Remove when name input UI is implemented
         controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
     }
 
