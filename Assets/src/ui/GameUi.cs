@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUi : MonoBehaviour
 {
     public Board board;
+    public Button rollDiceButton;
 
     private GameController controller = new GameController();
 
@@ -14,13 +16,9 @@ public class GameUi : MonoBehaviour
         controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
     }
 
-    void Update()
+    public void RollDice()
     {
-        // TODO: Remove when roll dice button is implemented
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RollDice();
-        }
+        StartCoroutine(PerformDiceRoll());
     }
 
     void LoadCurrentPlayerDetails()
@@ -32,12 +30,6 @@ public class GameUi : MonoBehaviour
         board.SetSelectedPiece(controller.CurrentPlayerPos);
 
         // TODO: Disable clicks on end turn button
-    }
-
-    void RollDice()
-    {
-        // TODO: Disable clicks on roll dice button
-        StartCoroutine(PerformDiceRoll());
     }
 
     void OnQuizTileActivated()
@@ -73,7 +65,7 @@ public class GameUi : MonoBehaviour
 
         LoadCurrentPlayerDetails();
 
-        // TODO: Enable clicks on roll dice button
+        rollDiceButton.interactable = true;
     }
 
     void DisplayNews() {}
@@ -95,7 +87,11 @@ public class GameUi : MonoBehaviour
     // Must be performed in coroutine to wait for piece to move before performing additional operations
     IEnumerator PerformDiceRoll()
     {
+        rollDiceButton.interactable = false;
+
         int diceValue = controller.GenerateDiceValue();
+        rollDiceButton.GetComponentInChildren<Text>().text = diceValue.ToString();
+
         yield return StartCoroutine(board.MovePiece(diceValue));
 
         // Check if piece landed or passed through GO tile
@@ -118,6 +114,8 @@ public class GameUi : MonoBehaviour
                 OnEventTileActivated();
                 break;
         }
+
+        rollDiceButton.GetComponentInChildren<Text>().text = "Roll Dice";
 
         // TODO: Remove when end turn button is implemented
         EndTurn();
