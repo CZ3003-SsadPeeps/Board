@@ -77,6 +77,8 @@ public class GameUi : MonoBehaviour
 
     void DisplayNews() {}
 
+    // [NOTE] This function corresponds to clicking the end game button. This is NOT the same as
+    // the first player reaching 14 laps
     void OnEndGameButtonClick()
     {
         // TODO: Display confirmation message, then end game
