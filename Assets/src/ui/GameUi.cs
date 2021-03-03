@@ -25,6 +25,7 @@ public class GameUi : MonoBehaviour
     {
         // TODO: Display player details
         Player currentPlayer = controller.CurrentPlayer;
+        Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
 
         // Select player's piece
         board.SetSelectedPiece(controller.CurrentPlayerPos);
@@ -35,16 +36,19 @@ public class GameUi : MonoBehaviour
     void OnQuizTileActivated()
     {
         // TODO: Launch quiz UI
+        Debug.Log("Launching quiz UI...");
     }
 
     void OnEventTileActivated()
     {
         // TODO: Launch event UI
+        Debug.Log("Launching event UI...");
     }
 
     void ShowStockMarket()
     {
         // TODO: Show view stock market UI
+        Debug.Log("Launching stock market UI...");
     }
 
     void EndTurn()
@@ -56,6 +60,11 @@ public class GameUi : MonoBehaviour
 
             // TODO: Display all players score
             Player[] players = controller.Players;
+            foreach (Player player in players)
+            {
+                Debug.Log($"Player[{player.Name}, ${player.Credit}]");
+            }
+
             return;
         }
 
@@ -75,6 +84,7 @@ public class GameUi : MonoBehaviour
     void OnEndGameButtonClick()
     {
         // TODO: Display confirmation message, then end game
+        Debug.Log("Ending game...");
     }
 
     void DisplayFinalScores() {}
@@ -82,6 +92,7 @@ public class GameUi : MonoBehaviour
     void ShowLeaderBoard()
     {
         // TODO: Show leaderboard UI
+        Debug.Log("Launching leaderboard Ui...");
     }
 
     // Must be performed in coroutine to wait for piece to move before performing additional operations
@@ -100,6 +111,7 @@ public class GameUi : MonoBehaviour
         {
             controller.IssueGoPayout();
             // TODO: Display GO payout
+            Debug.Log("Received GO payout");
         }
 
         // Launch tile event if needed

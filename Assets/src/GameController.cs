@@ -1,4 +1,6 @@
-﻿class GameController
+﻿using UnityEngine;
+
+class GameController
 {
     private static readonly int GO_PAYOUT = 150;
     // [Note] Must specify System namespace to avoid clash with Unity's Random class
@@ -42,9 +44,11 @@
     {
         foreach (Player player in Players)
         {
-            // Sell all stocks & add to score
+            // TODO: Sell all stocks & add to score
+            Debug.Log($"Selling stock of player {player.Name}");
         }
 
-        //    // Store all scores to database
+        // TODO: Store all credits to database
+        Debug.Log("Storing credits to database...");
     }
 }
