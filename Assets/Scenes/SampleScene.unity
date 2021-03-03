@@ -397,7 +397,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 398047796}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 604905982}
+        m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &398047796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 2060646578}
   rollDiceButton: {fileID: 1162998037}
+  endTurnButton: {fileID: 398047795}
 --- !u!4 &604905983
 Transform:
   m_ObjectHideFlags: 0

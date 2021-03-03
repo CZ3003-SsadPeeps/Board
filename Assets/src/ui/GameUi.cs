@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameUi : MonoBehaviour
 {
     public Board board;
-    public Button rollDiceButton;
+    public Button rollDiceButton, endTurnButton;
 
     private GameController controller = new GameController();
 
@@ -19,6 +19,24 @@ public class GameUi : MonoBehaviour
     public void RollDice()
     {
         StartCoroutine(PerformDiceRoll());
+    }
+
+    public void EndTurn()
+    {
+        if (board.HasReachedMaxLaps())
+        {
+            // TODO: Disable all buttons except leaderboard & back
+            controller.SavePlayerScores();
+            DisplayFinalScores();
+
+            return;
+        }
+
+        bool shouldShowNews = controller.NextTurn();
+        if (shouldShowNews) DisplayNews();
+
+        LoadCurrentPlayerDetails();
+        rollDiceButton.interactable = true;
     }
 
     void LoadCurrentPlayerDetails()
@@ -49,24 +67,6 @@ public class GameUi : MonoBehaviour
     {
         // TODO: Show view stock market UI
         Debug.Log("Launching stock market UI...");
-    }
-
-    void EndTurn()
-    {
-        if (board.HasReachedMaxLaps())
-        {
-            // TODO: Disable all buttons except leaderboard & back
-            controller.SavePlayerScores();
-            DisplayFinalScores();
-
-            return;
-        }
-
-        bool shouldShowNews = controller.NextTurn();
-        if (shouldShowNews) DisplayNews();
-
-        LoadCurrentPlayerDetails();
-        rollDiceButton.interactable = true;
     }
 
     void DisplayNews()
@@ -132,9 +132,6 @@ public class GameUi : MonoBehaviour
         }
 
         rollDiceButton.GetComponentInChildren<Text>().text = "Roll Dice";
-
-        // TODO: Remove when end turn button is implemented
-        EndTurn();
 
         // TODO: Enable clicks on end turn button
 
