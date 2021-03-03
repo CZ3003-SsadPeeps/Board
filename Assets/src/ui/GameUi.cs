@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUi : MonoBehaviour
 {
     public Board board;
+    public Button rollDiceButton;
 
     private GameController controller = new GameController();
 
@@ -87,6 +89,8 @@ public class GameUi : MonoBehaviour
     IEnumerator PerformDiceRoll()
     {
         int diceValue = controller.GenerateDiceValue();
+        rollDiceButton.GetComponentInChildren<Text>().text = diceValue.ToString();
+
         yield return StartCoroutine(board.MovePiece(diceValue));
 
         // Check if piece landed or passed through GO tile
@@ -109,6 +113,8 @@ public class GameUi : MonoBehaviour
                 OnEventTileActivated();
                 break;
         }
+
+        rollDiceButton.GetComponentInChildren<Text>().text = "Roll Dice";
 
         // TODO: Remove when end turn button is implemented
         EndTurn();

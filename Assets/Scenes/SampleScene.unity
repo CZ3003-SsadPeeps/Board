@@ -453,6 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 2060646578}
+  rollDiceButton: {fileID: 1162998037}
 --- !u!4 &604905983
 Transform:
   m_ObjectHideFlags: 0
