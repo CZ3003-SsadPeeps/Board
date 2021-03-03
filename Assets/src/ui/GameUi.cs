@@ -47,8 +47,7 @@ public class GameUi : MonoBehaviour
 
         // Select player's piece
         board.SetSelectedPiece(controller.CurrentPlayerPos);
-
-        // TODO: Disable clicks on end turn button
+        endTurnButton.interactable = false;
     }
 
     void OnQuizTileActivated()
@@ -132,8 +131,7 @@ public class GameUi : MonoBehaviour
         }
 
         rollDiceButton.GetComponentInChildren<Text>().text = "Roll Dice";
-
-        // TODO: Enable clicks on end turn button
+        endTurnButton.interactable = true;
 
         yield break;
     }
