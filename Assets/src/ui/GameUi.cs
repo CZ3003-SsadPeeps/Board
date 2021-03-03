@@ -32,12 +32,7 @@ public class GameUi : MonoBehaviour
 
     void RollDice()
     {
-        int diceValue = controller.GenerateDiceValue();
-        board.MovePiece(diceValue);
-
-        // TODO: Remove when end turn button is implemented
-        EndTurn();
-
+        StartCoroutine(PerformDiceRoll());
     }
 
     void OnQuizTileActivated()
@@ -75,5 +70,17 @@ public class GameUi : MonoBehaviour
     void ShowLeaderBoard()
     {
         // TODO: Show leaderboard UI
+    }
+
+    // Must be performed in coroutine to wait for piece to move before performing additional operations
+    IEnumerator PerformDiceRoll()
+    {
+        int diceValue = controller.GenerateDiceValue();
+        yield return StartCoroutine(board.MovePiece(diceValue));
+
+        // TODO: Remove when end turn button is implemented
+        EndTurn();
+
+        yield break;
     }
 }

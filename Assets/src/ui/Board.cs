@@ -16,23 +16,7 @@ public class Board : MonoBehaviour
         currentPieceIndex = index;
     }
 
-    internal void MovePiece(int diceValue)
-    {
-        StartCoroutine(EnumMove(diceValue));
-    }
-
-    internal Tile getCurrentTile()
-    {
-        int boardPos = pieces[currentPieceIndex].BoardPos;
-        return tiles[boardPos];
-    }
-
-    internal bool hasReachedMaxLaps()
-    {
-        return pieces[currentPieceIndex].NumLaps >= MAX_LAPS;
-    }
-
-    IEnumerator EnumMove(int numSteps)
+    internal IEnumerator MovePiece(int diceValue)
     {
         Piece currentPiece = pieces[currentPieceIndex];
         int currentBoardPos = currentPiece.BoardPos;
@@ -58,6 +42,17 @@ public class Board : MonoBehaviour
 
         currentPiece.UpdateBoardPos(numSteps);
         yield break;
+    }
+
+    internal Tile getCurrentTile()
+    {
+        int boardPos = pieces[currentPieceIndex].BoardPos;
+        return tiles[boardPos];
+    }
+
+    internal bool hasReachedMaxLaps()
+    {
+        return pieces[currentPieceIndex].NumLaps >= MAX_LAPS;
     }
 
     bool MoveToNextTile(Piece piece, Vector3 target)
