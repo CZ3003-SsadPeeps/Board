@@ -14,6 +14,7 @@ public class GameUi : MonoBehaviour
     {
         // TODO: Remove when name input UI is implemented
         controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
+        LoadCurrentPlayerDetails();
     }
 
     public void RollDice()
