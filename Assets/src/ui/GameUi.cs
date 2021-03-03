@@ -56,7 +56,18 @@ public class GameUi : MonoBehaviour
 
     void EndTurn()
     {
-        bool shouldShowNews = controller.NextTurn();
+        if (board.HasReachedMaxLaps())
+        {
+            // TODO: Disable all buttons except leaderboard & back
+            controller.SavePlayerScores();
+
+            // TODO: Display all players score
+            Player[] players = controller.Players;
+            return;
+        }
+
+            bool shouldShowNews = controller.NextTurn();
+
         if (shouldShowNews) DisplayNews();
 
         LoadCurrentPlayerDetails();
@@ -66,7 +77,7 @@ public class GameUi : MonoBehaviour
 
     void DisplayNews() {}
 
-    void EndGame()
+    void OnEndGameButtonClick()
     {
         // TODO: Display confirmation message, then end game
     }
