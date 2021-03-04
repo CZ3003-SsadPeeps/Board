@@ -8,10 +8,11 @@ public class GameUi : MonoBehaviour
     public Board board;
     public Canvas canvas;
     public Button rollDiceButton, endTurnButton;
-    public GameObject PlayerCardSmallPrefab, PlayerCardBigPrefab;
+    public GameObject PlayerCardSmallPrefab, PlayerCardBigPrefab, TextPrefab;
 
     private GameController controller = new GameController();
-    private List<GameObject> playerCardsSmall = new List<GameObject>();
+    private List<GameObject> listPlayerCardsSmall = new List<GameObject>();
+    private List<GameObject> listPlayerCardsBig = new List<GameObject>();
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class GameUi : MonoBehaviour
         LoadCurrentPlayerDetails();
         LoadPlayerCard();
         MovePlayerCard();
+        PopulatePlayerCard();
     }
 
     public void RollDice()
@@ -34,7 +36,6 @@ public class GameUi : MonoBehaviour
             // TODO: Disable all buttons except leaderboard & back
             controller.SavePlayerScores();
             DisplayFinalScores();
-
             return;
         }
 
@@ -44,6 +45,7 @@ public class GameUi : MonoBehaviour
         LoadCurrentPlayerDetails();
         rollDiceButton.interactable = true;
         MovePlayerCard();
+        PopulatePlayerCard();
     }
 
     void LoadCurrentPlayerDetails()
@@ -149,31 +151,86 @@ public class GameUi : MonoBehaviour
 
         for (int i = 0; i < controller.Players.Length; i++)
         {
-            playerCardsSmall.Add(Instantiate(PlayerCardSmallPrefab) as GameObject);
-            playerCardsSmall[i].transform.SetParent(canvas.transform, false);
-            playerCardsSmall[i].GetComponent<Image>().color = cardColors[i];
-            playerCardsSmall[i].GetComponent<PlayerCardSmall>().playerNameText.text = controller.Players[i].Name;
-            playerCardsSmall[i].GetComponent<PlayerCardSmall>().credits.text = controller.Players[i].Credit.ToString();
+            listPlayerCardsSmall.Add(Instantiate(PlayerCardSmallPrefab) as GameObject);
+            listPlayerCardsSmall[i].transform.SetParent(canvas.transform, false);
+            listPlayerCardsSmall[i].GetComponent<Image>().color = cardColors[i];
+            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().playerNameText.text = controller.Players[i].Name;
+            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().credits.text = controller.Players[i].Credit.ToString();
+
+            listPlayerCardsBig.Add(Instantiate(PlayerCardBigPrefab) as GameObject);
+            listPlayerCardsBig[i].transform.SetParent(canvas.transform, false);
+            listPlayerCardsBig[i].GetComponent<Image>().color = cardColors[i];
         }
     }
 
-    void MovePlayerCard() //Cycles the small player cards
+    void MovePlayerCard() //Cycles the player cards
     {
-        Vector3[] PlayerCardSmallVector = new Vector3[3] { new Vector3(-400f, -120f, 0f), new Vector3(-400f, -210f, 0), new Vector3(-400f, -300f, 0) };
+        Vector3[] PlayerCardSmallVector = new Vector3[3] { new Vector3(-400f, -180f, 0f), new Vector3(-400f, -270f, 0), new Vector3(-400f, -360f, 0) };
 
         int slot = 0;
 
         int i = 1;
 
-        playerCardsSmall[controller.CurrentPlayerPos].SetActive(false);
+        listPlayerCardsSmall[controller.CurrentPlayerPos].SetActive(false);
 
         while (slot < controller.Players.Length - 1)
         {
-            playerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].SetActive(true);
-            playerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
+            listPlayerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].SetActive(true);
+            listPlayerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
             i++;
             slot++;
         }
 
+        for (int j = 0; j < controller.Players.Length; j++)
+        {
+            if (j == controller.CurrentPlayerPos)
+            {
+                listPlayerCardsBig[j].SetActive(true);
+            }
+            else
+            {
+                listPlayerCardsBig[j].SetActive(false);
+            }
+        }
+
+    }
+
+    void PopulatePlayerCard()
+    {
+        Transform parent = listPlayerCardsBig[controller.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
+        GameObject text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
+        text = Instantiate(TextPrefab) as GameObject;
+        text.transform.SetParent(parent, false);
     }
 }
