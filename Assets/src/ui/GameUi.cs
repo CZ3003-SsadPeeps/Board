@@ -167,10 +167,10 @@ public class GameUi : MonoBehaviour
 
         playerCardsSmall[controller.CurrentPlayerPos].SetActive(false);
 
-        while (slot < 3)
+        while (slot < controller.Players.Length - 1)
         {
-            playerCardsSmall[(controller.CurrentPlayerPos + i) % 4].SetActive(true);
-            playerCardsSmall[(controller.CurrentPlayerPos + i) % 4].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
+            playerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].SetActive(true);
+            playerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
             i++;
             slot++;
         }
