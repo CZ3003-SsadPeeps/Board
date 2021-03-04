@@ -32,10 +32,7 @@ public class Board : MonoBehaviour
             Vector3 nextPos = nextTile.GetEmptySlotForPiece(currentPiece);
 
             // Perform movement
-            while (MoveToNextTile(currentPiece, nextPos))
-            {
-                yield return null;
-            }
+            yield return HopTowards(currentPiece, nextPos, 0.5f);
 
             yield return new WaitForSeconds(0.1f);
         }
@@ -54,9 +51,26 @@ public class Board : MonoBehaviour
         return pieces[currentPieceIndex].NumLaps >= MAX_LAPS;
     }
 
-    bool MoveToNextTile(Piece piece, Vector3 target)
+    IEnumerator HopTowards(Piece piece, Vector3 target, float time)
     {
-        return target != (piece.transform.position = Vector3.MoveTowards(piece.transform.position, target, 2f * Time.deltaTime));
+        float elapsedTime = 0;
+
+        Vector3 center = (piece.transform.position + target) * 0.5f;
+
+        center -= new Vector3(0, 0.5f, 0); //Adjust y value here to increase or decrease arc height (Smaller is higher)
+
+        Vector3 startRelPosition = piece.transform.position - center;
+        Vector3 endRelPosition = target - center;
+
+        while(elapsedTime < time)
+        {
+            piece.transform.position = Vector3.Slerp(startRelPosition, endRelPosition, elapsedTime/time);
+            piece.transform.position += center;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        piece.transform.position = target; //Snap to final target in case
     }
 
     void OnDrawGizmos()

@@ -6,15 +6,20 @@ using UnityEngine.UI;
 public class GameUi : MonoBehaviour
 {
     public Board board;
+    public Canvas canvas;
     public Button rollDiceButton, endTurnButton;
+    public GameObject PlayerCardSmallPrefab, PlayerCardBigPrefab;
 
     private GameController controller = new GameController();
+    private List<GameObject> playerCardsSmall = new List<GameObject>();
 
     void Start()
     {
         // TODO: Remove when name input UI is implemented
         controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
         LoadCurrentPlayerDetails();
+        LoadPlayerCard();
+        MovePlayerCard();
     }
 
     public void RollDice()
@@ -38,6 +43,7 @@ public class GameUi : MonoBehaviour
 
         LoadCurrentPlayerDetails();
         rollDiceButton.interactable = true;
+        MovePlayerCard();
     }
 
     void LoadCurrentPlayerDetails()
@@ -135,5 +141,39 @@ public class GameUi : MonoBehaviour
         endTurnButton.interactable = true;
 
         yield break;
+    }
+
+    void LoadPlayerCard()
+    {
+        Color32[] cardColors = new Color32[4] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
+
+        for (int i = 0; i < controller.Players.Length; i++)
+        {
+            playerCardsSmall.Add(Instantiate(PlayerCardSmallPrefab) as GameObject);
+            playerCardsSmall[i].transform.SetParent(canvas.transform, false);
+            playerCardsSmall[i].GetComponent<Image>().color = cardColors[i];
+            playerCardsSmall[i].GetComponent<PlayerCardSmall>().playerNameText.text = controller.Players[i].Name;
+            playerCardsSmall[i].GetComponent<PlayerCardSmall>().credits.text = controller.Players[i].Credit.ToString();
+        }
+    }
+
+    void MovePlayerCard() //Cycles the small player cards
+    {
+        Vector3[] PlayerCardSmallVector = new Vector3[3] { new Vector3(-400f, -120f, 0f), new Vector3(-400f, -210f, 0), new Vector3(-400f, -300f, 0) };
+
+        int slot = 0;
+
+        int i = 1;
+
+        playerCardsSmall[controller.CurrentPlayerPos].SetActive(false);
+
+        while (slot < 3)
+        {
+            playerCardsSmall[(controller.CurrentPlayerPos + i) % 4].SetActive(true);
+            playerCardsSmall[(controller.CurrentPlayerPos + i) % 4].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
+            i++;
+            slot++;
+        }
+
     }
 }
