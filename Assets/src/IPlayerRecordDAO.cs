@@ -1,6 +1,8 @@
-﻿interface IPlayerRecordDAO
+﻿using System.Collections.Generic;
+
+interface IPlayerRecordDAO
 {
     bool StorePlayerRecords(PlayerRecord[] playerRecords);
 
-    PlayerRecord[] RetrievePlayerRecords();
+    List<PlayerRecord> RetrievePlayerRecords();
 }
