@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class GameController
 {
@@ -8,6 +10,7 @@ class GameController
     private static readonly System.Random RANDOM = new System.Random();
 
     IStockTrader stockTrader;
+    IPlayerRecordDAO playerRecordDAO;
     public Player[] Players { get; private set; }
     public Player CurrentPlayer
     {
@@ -16,9 +19,10 @@ class GameController
 
     public int CurrentPlayerPos { get; private set; } = 0;
 
-    public GameController(IStockTrader stockTrader)
+    public GameController(IStockTrader stockTrader, IPlayerRecordDAO playerRecordDAO)
     {
         this.stockTrader = stockTrader;
+        this.playerRecordDAO = playerRecordDAO;
     }
 
     public void SetPlayerNames(string[] names)
@@ -54,7 +58,17 @@ class GameController
 
     public void SavePlayerScores()
     {
-        stockTrader.SellAllStocks(Players);   
+        stockTrader.SellAllStocks(Players);
+
+        PlayerRecord[] records = new PlayerRecord[Players.Length];
+        Player player;
+        for (int i = 0; i < Players.Length; i++)
+        {
+            player = Players[i];
+            records[i] = new PlayerRecord(player.Name, player.Credit, (long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds);
+        }
+
         Debug.Log("Storing credits to database...");
+        playerRecordDAO.StorePlayerRecords(records);
     }
 }
