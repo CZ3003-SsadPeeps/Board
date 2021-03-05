@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 class GameController
 {
@@ -6,6 +9,8 @@ class GameController
     // [Note] Must specify System namespace to avoid clash with Unity's Random class
     private static readonly System.Random RANDOM = new System.Random();
 
+    IStockTrader stockTrader;
+    IPlayerRecordDAO playerRecordDAO;
     public Player[] Players { get; private set; }
     public Player CurrentPlayer
     {
@@ -14,6 +19,12 @@ class GameController
 
     public int CurrentPlayerPos { get; private set; } = 0;
 
+    public GameController(IStockTrader stockTrader, IPlayerRecordDAO playerRecordDAO)
+    {
+        this.stockTrader = stockTrader;
+        this.playerRecordDAO = playerRecordDAO;
+    }
+
     public void SetPlayerNames(string[] names)
     {
         Players = new Player[names.Length];
@@ -21,6 +32,11 @@ class GameController
         {
             Players[i] = new Player(names[i]);
         }
+    }
+
+    public List<PlayerStock> GetPlayerStocks()
+    {
+        return stockTrader.GetPlayerStocks(CurrentPlayer.Name);
     }
 
     public int GenerateDiceValue()
@@ -42,13 +58,17 @@ class GameController
 
     public void SavePlayerScores()
     {
-        foreach (Player player in Players)
+        stockTrader.SellAllStocks(Players);
+
+        PlayerRecord[] records = new PlayerRecord[Players.Length];
+        Player player;
+        for (int i = 0; i < Players.Length; i++)
         {
-            // TODO: Sell all stocks & add to score
-            Debug.Log($"Selling stock of player {player.Name}");
+            player = Players[i];
+            records[i] = new PlayerRecord(player.Name, player.Credit, (long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds);
         }
 
-        // TODO: Store all credits to database
         Debug.Log("Storing credits to database...");
+        playerRecordDAO.StorePlayerRecords(records);
     }
 }
