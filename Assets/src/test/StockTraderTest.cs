@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 class StockTraderTest : IStockTrader
 {
@@ -9,6 +10,9 @@ class StockTraderTest : IStockTrader
 
     public void SellAllStocks(Player[] players)
     {
-
+        foreach (Player player in Players)
+        {
+            Debug.Log($"Selling stock of player {player.Name}");
+        }
     }
 }

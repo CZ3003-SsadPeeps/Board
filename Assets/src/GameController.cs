@@ -7,7 +7,7 @@ class GameController
     // [Note] Must specify System namespace to avoid clash with Unity's Random class
     private static readonly System.Random RANDOM = new System.Random();
 
-    IStockTrader StockTrader;
+    IStockTrader stockTrader;
     public Player[] Players { get; private set; }
     public Player CurrentPlayer
     {
@@ -18,7 +18,7 @@ class GameController
 
     public GameController(IStockTrader stockTrader)
     {
-        this.StockTrader = stockTrader;
+        this.stockTrader = stockTrader;
     }
 
     public void SetPlayerNames(string[] names)
@@ -32,7 +32,7 @@ class GameController
 
     public List<PlayerStock> GetPlayerStocks()
     {
-        return StockTrader.GetPlayerStocks(CurrentPlayer.Name);
+        return stockTrader.GetPlayerStocks(CurrentPlayer.Name);
     }
 
     public int GenerateDiceValue()
@@ -54,13 +54,7 @@ class GameController
 
     public void SavePlayerScores()
     {
-        foreach (Player player in Players)
-        {
-            StockTrader.SellAllStocks(Players);
-            Debug.Log($"Selling stock of player {player.Name}");
-        }
-
-        // TODO: Store all credits to database
+        stockTrader.SellAllStocks(Players);   
         Debug.Log("Storing credits to database...");
     }
 }
