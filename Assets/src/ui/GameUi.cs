@@ -18,10 +18,8 @@ public class GameUi : MonoBehaviour
     {
         // TODO: Remove when name input UI is implemented
         controller.SetPlayerNames(new string[] { "Apple", "Banana", "Cherry", "Mewtwo" });
-        LoadCurrentPlayerDetails();
         LoadPlayerCard();
-        MovePlayerCard();
-        PopulatePlayerCard();
+        LoadCurrentPlayerDetails();
     }
 
     public void RollDice()
@@ -44,15 +42,14 @@ public class GameUi : MonoBehaviour
 
         LoadCurrentPlayerDetails();
         rollDiceButton.interactable = true;
-        MovePlayerCard();
-        PopulatePlayerCard();
     }
 
     void LoadCurrentPlayerDetails()
     {
-        // TODO: Display player details
         Player currentPlayer = controller.CurrentPlayer;
         Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
+        MovePlayerCard();
+        PopulatePlayerCard();
 
         // Select player's piece
         board.SetSelectedPiece(controller.CurrentPlayerPos);
