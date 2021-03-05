@@ -10,7 +10,7 @@ class StockTraderTest : IStockTrader
 
     public void SellAllStocks(Player[] players)
     {
-        foreach (Player player in Players)
+        foreach (Player player in players)
         {
             Debug.Log($"Selling stock of player {player.Name}");
         }
