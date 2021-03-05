@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 class GameController
 {
@@ -6,6 +7,7 @@ class GameController
     // [Note] Must specify System namespace to avoid clash with Unity's Random class
     private static readonly System.Random RANDOM = new System.Random();
 
+    IStockTrader StockTrader;
     public Player[] Players { get; private set; }
     public Player CurrentPlayer
     {
@@ -14,6 +16,11 @@ class GameController
 
     public int CurrentPlayerPos { get; private set; } = 0;
 
+    public GameController(IStockTrader stockTrader)
+    {
+        this.StockTrader = stockTrader;
+    }
+
     public void SetPlayerNames(string[] names)
     {
         Players = new Player[names.Length];
@@ -21,6 +28,11 @@ class GameController
         {
             Players[i] = new Player(names[i]);
         }
+    }
+
+    public List<PlayerStock> GetPlayerStocks()
+    {
+        return StockTrader.GetPlayerStocks(CurrentPlayer.Name);
     }
 
     public int GenerateDiceValue()
@@ -44,7 +56,7 @@ class GameController
     {
         foreach (Player player in Players)
         {
-            // TODO: Sell all stocks & add to score
+            StockTrader.SellAllStocks(Players);
             Debug.Log($"Selling stock of player {player.Name}");
         }
 

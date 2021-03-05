@@ -10,7 +10,8 @@ public class GameUi : MonoBehaviour
     public Button rollDiceButton, endTurnButton;
     public GameObject PlayerCardSmallPrefab, PlayerCardBigPrefab, TextPrefab;
 
-    private GameController controller = new GameController();
+    // TODO: Replace with actual StockTrader class from stock system
+    private GameController controller = new GameController(new StockTraderTest());
     private List<GameObject> listPlayerCardsSmall = new List<GameObject>();
     private List<GameObject> listPlayerCardsBig = new List<GameObject>();
 
@@ -194,6 +195,9 @@ public class GameUi : MonoBehaviour
 
     void PopulatePlayerCard()
     {
+        // TODO: Populate big player card with PlayerStock data
+        List<PlayerStock> stocks = controller.GetPlayerStocks();
+
         Transform parent = listPlayerCardsBig[controller.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
         GameObject text = Instantiate(TextPrefab) as GameObject;
         text.transform.SetParent(parent, false);
