@@ -5,6 +5,6 @@ public class HomeUi : MonoBehaviour
 {
     public void OnPlayButtonClick()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Name Input");
     }
 }

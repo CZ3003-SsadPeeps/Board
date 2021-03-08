@@ -10,13 +10,6 @@ class GameController
 
     IStockTrader stockTrader;
     IPlayerRecordDAO playerRecordDAO;
-    public Player[] Players { get; private set; }
-    public Player CurrentPlayer
-    {
-        get { return Players[CurrentPlayerPos]; }
-    }
-
-    public int CurrentPlayerPos { get; private set; } = 0;
 
     public GameController(IStockTrader stockTrader, IPlayerRecordDAO playerRecordDAO)
     {
@@ -24,18 +17,9 @@ class GameController
         this.playerRecordDAO = playerRecordDAO;
     }
 
-    public void SetPlayerNames(string[] names)
-    {
-        Players = new Player[names.Length];
-        for (int i = 0; i < names.Length; i++)
-        {
-            Players[i] = new Player(names[i]);
-        }
-    }
-
     public List<PlayerStock> GetPlayerStocks()
     {
-        return stockTrader.GetPlayerStocks(CurrentPlayer.Name);
+        return stockTrader.GetPlayerStocks(GameStore.CurrentPlayer.Name);
     }
 
     public int GenerateDiceValue()
@@ -46,24 +30,24 @@ class GameController
 
     public void IssueGoPayout()
     {
-        CurrentPlayer.AddCredit(GO_PAYOUT);
+        GameStore.CurrentPlayer.AddCredit(GO_PAYOUT);
     }
 
     public bool NextTurn()
     {
-        CurrentPlayerPos = (CurrentPlayerPos + 1) % Players.Length;
-        return CurrentPlayerPos == 0;
+        GameStore.IncrementTurn();
+        return GameStore.CurrentPlayerPos == 0;
     }
 
     public void SavePlayerScores()
     {
-        stockTrader.SellAllStocks(Players);
+        stockTrader.SellAllStocks(GameStore.Players);
 
-        PlayerRecord[] records = new PlayerRecord[Players.Length];
+        PlayerRecord[] records = new PlayerRecord[GameStore.Players.Length];
         Player player;
-        for (int i = 0; i < Players.Length; i++)
+        for (int i = 0; i < records.Length; i++)
         {
-            player = Players[i];
+            player = GameStore.Players[i];
             records[i] = new PlayerRecord(player.Name, player.Credit, (long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds);
         }
 
