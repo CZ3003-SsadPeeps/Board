@@ -17,14 +17,6 @@ class GameController
         this.playerRecordDAO = playerRecordDAO;
     }
 
-    public void SetPlayerNames(string[] names)
-    {
-        for (int i = 0; i < names.Length; i++)
-        {
-            GameStore.Players[i] = new Player(names[i]);
-        }
-    }
-
     public List<PlayerStock> GetPlayerStocks()
     {
         return stockTrader.GetPlayerStocks(GameStore.CurrentPlayer.Name);
