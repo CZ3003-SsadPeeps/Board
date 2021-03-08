@@ -47,13 +47,13 @@ public class GameUi : MonoBehaviour
 
     void LoadCurrentPlayerDetails()
     {
-        Player currentPlayer = controller.CurrentPlayer;
+        Player currentPlayer = GameStore.CurrentPlayer;
         Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
         MovePlayerCard();
         PopulatePlayerCard();
 
         // Select player's piece
-        board.SetSelectedPiece(controller.CurrentPlayerPos);
+        board.SetSelectedPiece(GameStore.CurrentPlayerPos);
         endTurnButton.interactable = false;
     }
 
@@ -92,7 +92,7 @@ public class GameUi : MonoBehaviour
     void DisplayFinalScores()
     {
         // TODO: Display all players score
-        Player[] players = controller.Players;
+        Player[] players = GameStore.Players;
         foreach (Player player in players)
         {
             Debug.Log($"Player[{player.Name}, ${player.Credit}]");
@@ -147,13 +147,13 @@ public class GameUi : MonoBehaviour
     {
         Color32[] cardColors = new Color32[4] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
 
-        for (int i = 0; i < controller.Players.Length; i++)
+        for (int i = 0; i < GameStore.Players.Length; i++)
         {
             listPlayerCardsSmall.Add(Instantiate(PlayerCardSmallPrefab) as GameObject);
             listPlayerCardsSmall[i].transform.SetParent(canvas.transform, false);
             listPlayerCardsSmall[i].GetComponent<Image>().color = cardColors[i];
-            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().playerNameText.text = controller.Players[i].Name;
-            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().credits.text = controller.Players[i].Credit.ToString();
+            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().playerNameText.text = GameStore.Players[i].Name;
+            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().credits.text = GameStore.Players[i].Credit.ToString();
 
             listPlayerCardsBig.Add(Instantiate(PlayerCardBigPrefab) as GameObject);
             listPlayerCardsBig[i].transform.SetParent(canvas.transform, false);
@@ -169,19 +169,19 @@ public class GameUi : MonoBehaviour
 
         int i = 1;
 
-        listPlayerCardsSmall[controller.CurrentPlayerPos].SetActive(false);
+        listPlayerCardsSmall[GameStore.CurrentPlayerPos].SetActive(false);
 
-        while (slot < controller.Players.Length - 1)
+        while (slot < GameStore.Players.Length - 1)
         {
-            listPlayerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].SetActive(true);
-            listPlayerCardsSmall[(controller.CurrentPlayerPos + i) % controller.Players.Length].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
+            listPlayerCardsSmall[(GameStore.CurrentPlayerPos + i) % GameStore.Players.Length].SetActive(true);
+            listPlayerCardsSmall[(GameStore.CurrentPlayerPos + i) % GameStore.Players.Length].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
             i++;
             slot++;
         }
 
-        for (int j = 0; j < controller.Players.Length; j++)
+        for (int j = 0; j < GameStore.Players.Length; j++)
         {
-            if (j == controller.CurrentPlayerPos)
+            if (j == GameStore.CurrentPlayerPos)
             {
                 listPlayerCardsBig[j].SetActive(true);
             }
@@ -198,7 +198,7 @@ public class GameUi : MonoBehaviour
         // TODO: Populate big player card with PlayerStock data
         List<PlayerStock> stocks = controller.GetPlayerStocks();
 
-        Transform parent = listPlayerCardsBig[controller.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
+        Transform parent = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
         GameObject text = Instantiate(TextPrefab) as GameObject;
         text.transform.SetParent(parent, false);
         text = Instantiate(TextPrefab) as GameObject;

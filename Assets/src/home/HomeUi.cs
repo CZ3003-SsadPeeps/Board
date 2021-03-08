@@ -5,6 +5,7 @@ public class HomeUi : MonoBehaviour
 {
     public void OnPlayButtonClick()
     {
+        GameStore.Reset();
         SceneManager.LoadScene("Game");
     }
 }
