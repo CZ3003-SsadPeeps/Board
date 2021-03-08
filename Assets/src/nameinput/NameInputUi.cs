@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NameInputUi : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class NameInputUi : MonoBehaviour
 
         if (!areNamesValid) return;
 
-        // TODO: Go to Game scene
-        Debug.Log("Loading game...");
+        GameStore.InitPlayers(nameInputs);
+        SceneManager.LoadScene("Game");
     }
 }

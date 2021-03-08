@@ -8,9 +8,14 @@
 
     public static int CurrentPlayerPos { get; private set; } = 0;
 
-    public static void Reset()
+    public static void InitPlayers(string[] names)
     {
-        Players = new Player[4];
+        Players = new Player[names.Length];
+        for (int i = 0; i < names.Length; i++)
+        {
+            Players[i] = new Player(names[i]);
+        }
+
         CurrentPlayerPos = 0;
     }
 
