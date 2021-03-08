@@ -1642,7 +1642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1191293377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1694,7 +1694,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Name cannot be blank! srkjgbfsruikgfbsd
+  m_Text: Name cannot be blank!
 --- !u!222 &1191293379
 CanvasRenderer:
   m_ObjectHideFlags: 0
