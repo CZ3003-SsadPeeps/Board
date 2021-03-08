@@ -5,6 +5,6 @@ public class HomeUi : MonoBehaviour
 {
     public void OnPlayButtonClick()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
     }
 }
