@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HomeUi : MonoBehaviour
 {
     public void OnPlayButtonClick()
     {
-        Debug.Log("Play button clicked");
+        SceneManager.LoadScene("SampleScene");
     }
 }
