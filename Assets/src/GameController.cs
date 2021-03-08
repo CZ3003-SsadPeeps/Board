@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 class GameController
 {
-    private static readonly int GO_PAYOUT = 150;
+    static readonly int GO_PAYOUT = 150;
     // [Note] Must specify System namespace to avoid clash with Unity's Random class
-    private static readonly System.Random RANDOM = new System.Random();
+    static readonly System.Random RANDOM = new System.Random();
 
     IStockTrader stockTrader;
     IPlayerRecordDAO playerRecordDAO;

@@ -11,9 +11,9 @@ public class GameUi : MonoBehaviour
     public GameObject PlayerCardSmallPrefab, PlayerCardBigPrefab, TextPrefab;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
-    private GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
-    private List<GameObject> listPlayerCardsSmall = new List<GameObject>();
-    private List<GameObject> listPlayerCardsBig = new List<GameObject>();
+    GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
+    List<GameObject> listPlayerCardsSmall = new List<GameObject>();
+    List<GameObject> listPlayerCardsBig = new List<GameObject>();
 
     void Start()
     {
