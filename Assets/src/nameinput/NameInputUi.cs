@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class NameInputUi : MonoBehaviour
@@ -7,24 +6,34 @@ public class NameInputUi : MonoBehaviour
     public InputField[] inputFields;
     public Text[] errorMessages;
 
+    NameInputController controller = new NameInputController();
+
     public void OnStartButtonClick()
     {
+        int i;
+
         // Dismiss all error messages
-        foreach(Text errorMessage in errorMessages)
+        foreach (Text errorMessage in errorMessages)
         {
             errorMessage.gameObject.SetActive(false);
         }
 
-        bool areNamesValid = true;
-        string inputFieldText;
-        int i, j;
-        for(i = 0; i < inputFields.Length; i++)
+        string[] nameInputs = new string[inputFields.Length];
+        for (i = 0; i < inputFields.Length; i++)
         {
-            inputFieldText = inputFields[i].text;
-            Debug.Log($"Text at position {i} = {inputFieldText}");
+            nameInputs[i] = inputFields[i].text;
+        }
 
-            // Check if name is blank
-            if (!ValidateName(inputFieldText))
+        bool areNamesValid = true;
+        NameValidationResult[] results = controller.ValidateNames(nameInputs);
+        NameValidationResult result;
+        int otherPos;
+        for (i = 0; i < results.Length; i++)
+        {
+            result = results[i];
+            if (result is NameValidationResult.Pass) continue;
+
+            if (result is NameValidationResult.IsBlank)
             {
                 areNamesValid = false;
                 errorMessages[i].text = "Name cannot be blank!";
@@ -32,28 +41,18 @@ public class NameInputUi : MonoBehaviour
                 continue;
             }
 
-            // Check if someone else has the same name
-            for (j = i - 1; j >= 0; j--)
+            if (result is NameValidationResult.Clash)
             {
-                if (inputFieldText != inputFields[j].text) continue;
-
                 areNamesValid = false;
-                errorMessages[i].text = $"Name cannot be the same as Player {j + 1}'s name";
+                otherPos = (result as NameValidationResult.Clash).Pos + 1;
+                errorMessages[i].text = $"Name cannot be the same as Player {otherPos}'s name";
                 errorMessages[i].gameObject.SetActive(true);
-                break;
             }
         }
-
-        Debug.Log($"Are names valid? {areNamesValid}");
 
         if (!areNamesValid) return;
 
         // TODO: Go to Game scene
         Debug.Log("Loading game...");
-    }
-
-    private bool ValidateName(string name)
-    {
-        return !String.IsNullOrWhiteSpace(name);
     }
 }
