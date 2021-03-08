@@ -1121,6 +1121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 939689103}
+  - component: {fileID: 939689104}
   m_Layer: 0
   m_Name: Name Input UI
   m_TagString: Untagged
@@ -1146,6 +1147,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &939689104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939689102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83998ab46769547a9b012078435673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputFields:
+  - {fileID: 1898186523}
+  - {fileID: 1351401672}
+  - {fileID: 657213430}
+  - {fileID: 1750556550}
+  errorMessages:
+  - {fileID: 1191293378}
+  - {fileID: 1845000564}
+  - {fileID: 647595406}
+  - {fileID: 998174937}
 --- !u!1 &962836416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1576,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1109343988}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 939689104}
+        m_MethodName: OnStartButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1109343988
 MonoBehaviour:
   m_ObjectHideFlags: 0
