@@ -10,9 +10,9 @@
 
     public PlayerStock(string companyName, int quantity, int avgPurchasePrice, int currentStockPrice)
     {
-        this.CompanyName = companyName;
-        this.Quantity = quantity;
-        this.AvgPurchasePrice = avgPurchasePrice;
-        this.CurrentStockPrice = currentStockPrice;
+        CompanyName = companyName;
+        Quantity = quantity;
+        AvgPurchasePrice = avgPurchasePrice;
+        CurrentStockPrice = currentStockPrice;
     }
 }

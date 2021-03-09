@@ -32,7 +32,7 @@ class NameInputController
         return results;
     }
 
-    private bool ValidateName(string name)
+    bool ValidateName(string name)
     {
         return !String.IsNullOrWhiteSpace(name);
     }

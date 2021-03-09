@@ -6,8 +6,8 @@
 
     public PlayerRecord(string name, int credit, long dateAchieved)
     {
-        this.Name = name;
-        this.CreditEarned = credit;
-        this.DateAchieved = dateAchieved;
+        Name = name;
+        CreditEarned = credit;
+        DateAchieved = dateAchieved;
     }
 }

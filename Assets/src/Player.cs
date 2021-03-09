@@ -5,7 +5,7 @@
 
     public Player(string name)
     {
-        this.Name = name;
+        Name = name;
     }
 
     public void AddCredit(int amount)
