@@ -11,6 +11,7 @@ class StockTraderTest : IStockTrader
             new PlayerStock("AMD", 22, 16, 55),
             new PlayerStock("Raid Shadow Legends", 35, 21, 69),
             new PlayerStock("Gamestop", 88, 69, 420),
+            new PlayerStock("NTU", 1, 6, 2),
         };
     }
 
