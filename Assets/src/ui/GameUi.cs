@@ -191,6 +191,24 @@ public class GameUi : MonoBehaviour
         Transform parent = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
         GameObject text;
 
+        // Headers
+        text = Instantiate(TextPrefab);
+        text.transform.SetParent(parent, false);
+        text.GetComponent<Text>().text = "Company";
+
+        text = Instantiate(TextPrefab);
+        text.transform.SetParent(parent, false);
+        text.GetComponent<Text>().text = "Quantity";
+
+        text = Instantiate(TextPrefab);
+        text.transform.SetParent(parent, false);
+        text.GetComponent<Text>().text = "Average Purchase Price";
+
+        text = Instantiate(TextPrefab);
+        text.transform.SetParent(parent, false);
+        text.GetComponent<Text>().text = "Current Stock Price";
+
+        // Stock info
         List<PlayerStock> stocks = controller.GetPlayerStocks();
         foreach (PlayerStock stock in stocks)
         {
