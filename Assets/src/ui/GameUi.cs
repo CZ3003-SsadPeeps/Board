@@ -188,12 +188,10 @@ public class GameUi : MonoBehaviour
 
     void PopulatePlayerCard()
     {
-        // TODO: Populate big player card with PlayerStock data
-        List<PlayerStock> stocks = controller.GetPlayerStocks();
-
         Transform parent = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
-
         GameObject text;
+
+        List<PlayerStock> stocks = controller.GetPlayerStocks();
         foreach (PlayerStock stock in stocks)
         {
             text = Instantiate(TextPrefab);
