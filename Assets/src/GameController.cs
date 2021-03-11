@@ -35,8 +35,7 @@ class GameController
 
     public bool NextTurn()
     {
-        GameStore.IncrementTurn();
-        return GameStore.CurrentPlayerPos == 0;
+        return GameStore.IncrementTurn();
     }
 
     public void SavePlayerScores()

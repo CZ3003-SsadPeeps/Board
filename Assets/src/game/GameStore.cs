@@ -27,8 +27,9 @@
         CurrentPlayerPos = 0;
     }
 
-    public static void IncrementTurn()
+    public static bool IncrementTurn()
     {
         CurrentPlayerPos = (CurrentPlayerPos + 1) % Players.Length;
+        return CurrentPlayerPos == 0;
     }
 }
