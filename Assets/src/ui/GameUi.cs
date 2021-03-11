@@ -143,7 +143,8 @@ public class GameUi : MonoBehaviour
 
     void LoadPlayerCard()
     {
-        Color32[] cardColors = new Color32[4] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
+        Vector3[] PlayerCardSmallVector = new Vector3[] { new Vector3(-400f, -180f, 0f), new Vector3(-400f, -270f, 0), new Vector3(-400f, -360f, 0), new Vector3(-400f, -450f, 0) };
+        Color32[] cardColors = new Color32[] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
 
         for (int i = 0; i < GameStore.Players.Length; i++)
         {
@@ -152,43 +153,25 @@ public class GameUi : MonoBehaviour
             listPlayerCardsSmall[i].GetComponent<Image>().color = cardColors[i];
             listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().playerNameText.text = GameStore.Players[i].Name;
             listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().credits.text = GameStore.Players[i].Credit.ToString();
+            listPlayerCardsSmall[i].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[i];
 
             listPlayerCardsBig.Add(Instantiate(PlayerCardBigPrefab) as GameObject);
             listPlayerCardsBig[i].transform.SetParent(canvas.transform, false);
             listPlayerCardsBig[i].GetComponent<Image>().color = cardColors[i];
+            listPlayerCardsBig[i].SetActive(false);
         }
     }
 
     void MovePlayerCard() //Cycles the player cards
     {
-        Vector3[] PlayerCardSmallVector = new Vector3[3] { new Vector3(-400f, -180f, 0f), new Vector3(-400f, -270f, 0), new Vector3(-400f, -360f, 0) };
-
-        int slot = 0;
-
-        int i = 1;
-
-        listPlayerCardsSmall[GameStore.CurrentPlayerPos].SetActive(false);
-
-        while (slot < GameStore.Players.Length - 1)
+        listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
+        if (GameStore.CurrentPlayerPos == 0)
         {
-            listPlayerCardsSmall[(GameStore.CurrentPlayerPos + i) % GameStore.Players.Length].SetActive(true);
-            listPlayerCardsSmall[(GameStore.CurrentPlayerPos + i) % GameStore.Players.Length].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[slot];
-            i++;
-            slot++;
-        }
-
-        for (int j = 0; j < GameStore.Players.Length; j++)
+            listPlayerCardsBig[GameStore.Players.Length - 1].SetActive(false);
+        } else
         {
-            if (j == GameStore.CurrentPlayerPos)
-            {
-                listPlayerCardsBig[j].SetActive(true);
-            }
-            else
-            {
-                listPlayerCardsBig[j].SetActive(false);
-            }
+            listPlayerCardsBig[GameStore.CurrentPlayerPos - 1].SetActive(false);
         }
-
     }
 
     void PopulatePlayerCard()
