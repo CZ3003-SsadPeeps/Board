@@ -142,7 +142,7 @@ public class GameUi : MonoBehaviour
 
     void GeneratePlayerCards()
     {
-        Color32[] cardColors = new Color32[] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
+        Color32[] cardColors = new Color32[] { new Color32(240, 98, 146, 255), new Color32(186, 102, 199, 255), new Color32(125, 133, 201, 255), new Color32(145, 164, 174, 255) };
 
         Player player;
         GameObject cardObject;
