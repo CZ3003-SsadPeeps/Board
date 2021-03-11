@@ -147,6 +147,7 @@ public class GameUi : MonoBehaviour
         Player player;
         GameObject cardObject;
         PlayerCardSmall smallPlayerCard;
+        PlayerCardBig bigPlayerCard;
         for (int i = 0; i < GameStore.Players.Length; i++)
         {
             player = GameStore.Players[i];
@@ -168,6 +169,9 @@ public class GameUi : MonoBehaviour
             cardObject.transform.SetParent(canvas.transform, false);
             cardObject.GetComponent<Image>().color = cardColors[i];
             cardObject.SetActive(false);
+
+            bigPlayerCard = cardObject.GetComponent<PlayerCardBig>();
+            bigPlayerCard.playerNameText.text = player.Name;
             listPlayerCardsBig.Add(cardObject);
         }
     }
