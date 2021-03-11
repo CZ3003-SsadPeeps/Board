@@ -188,7 +188,9 @@ public class GameUi : MonoBehaviour
 
     void PopulatePlayerCard()
     {
-        Transform parent = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
+        PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
+
+        Transform parent = playerCard.content;
         GameObject textObject;
         Text headerText;
 
@@ -237,5 +239,8 @@ public class GameUi : MonoBehaviour
             textObject.transform.SetParent(parent, false);
             textObject.GetComponent<Text>().text = $"${stock.CurrentStockPrice}";
         }
+
+        // Scroll layout by default scrolls to the middle of the list, so must scroll back to top
+        playerCard.scrollView.normalizedPosition = new Vector2(0, 1);
     }
 }
