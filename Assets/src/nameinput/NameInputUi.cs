@@ -12,8 +12,6 @@ public class NameInputUi : MonoBehaviour
 
     public void OnStartButtonClick()
     {
-        int i;
-
         // Dismiss all error messages
         foreach (Text errorMessage in errorMessages)
         {
@@ -22,7 +20,7 @@ public class NameInputUi : MonoBehaviour
 
         // Get all names
         string[] nameInputs = new string[inputFields.Length];
-        for (i = 0; i < inputFields.Length; i++)
+        for (int i = 0; i < inputFields.Length; i++)
         {
             nameInputs[i] = inputFields[i].text;
         }
