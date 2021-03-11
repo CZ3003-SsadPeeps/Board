@@ -26,7 +26,7 @@ public class NameInputUi : MonoBehaviour
         }
 
         bool areNamesValid = true;
-        NameValidationResult[] results = controller.ValidateNames(nameInputs);
+        NameValidationResult[] results = controller.SubmitNames(nameInputs);
         NameValidationResult result;
         int otherPos;
         for (i = 0; i < results.Length; i++)
@@ -52,8 +52,6 @@ public class NameInputUi : MonoBehaviour
         }
 
         if (!areNamesValid) return;
-
-        GameStore.InitPlayers(nameInputs);
         SceneManager.LoadScene("Game");
     }
 }

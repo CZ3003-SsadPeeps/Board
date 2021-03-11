@@ -2,10 +2,11 @@
 
 class NameInputController
 {
-    internal NameValidationResult[] ValidateNames(string[] names)
+    internal NameValidationResult[] SubmitNames(string[] names)
     {
         NameValidationResult[] results = new NameValidationResult[names.Length];
 
+        bool areNamesValid = true;
         string name;
         int i, j;
         for (i = 0; i < names.Length; i++)
@@ -15,6 +16,7 @@ class NameInputController
             // Check if name is blank
             if (!ValidateName(name))
             {
+                areNamesValid = false;
                 results[i] = new NameValidationResult.IsBlank();
                 continue;
             }
@@ -24,9 +26,15 @@ class NameInputController
             {
                 if (name != names[j]) continue;
 
+                areNamesValid = false;
                 results[i] = new NameValidationResult.Clash(j);
                 break;
             }
+        }
+
+        if (areNamesValid)
+        {
+            GameStore.InitPlayers(names);
         }
 
         return results;
