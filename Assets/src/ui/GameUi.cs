@@ -174,7 +174,7 @@ public class GameUi : MonoBehaviour
     void MovePlayerCard() //Cycles the player cards
     {
         listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
-        listPlayerCardsBig[GameStore.PrevPlayerPos].SetActive(true);
+        listPlayerCardsBig[GameStore.PrevPlayerPos].SetActive(false);
     }
 
     void PopulatePlayerCard()
