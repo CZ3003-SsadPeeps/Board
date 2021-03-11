@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class NameInputUi : MonoBehaviour
 {
@@ -19,39 +20,41 @@ public class NameInputUi : MonoBehaviour
             errorMessage.gameObject.SetActive(false);
         }
 
+        // Get all names
         string[] nameInputs = new string[inputFields.Length];
         for (i = 0; i < inputFields.Length; i++)
         {
             nameInputs[i] = inputFields[i].text;
         }
 
-        bool areNamesValid = true;
-        NameValidationResult[] results = controller.SubmitNames(nameInputs);
-        NameValidationResult result;
-        int otherPos;
-        for (i = 0; i < results.Length; i++)
+        List<NameValidationError> results = controller.SubmitNames(nameInputs);
+        // Check if any errors occur
+        if (results.Count > 0)
         {
-            result = results[i];
-            if (result is NameValidationResult.Pass) continue;
-
-            if (result is NameValidationResult.IsBlank)
+            Text errorMessage;
+            int otherPos;
+            foreach (NameValidationError result in results)
             {
-                areNamesValid = false;
-                errorMessages[i].text = "Name cannot be blank!";
-                errorMessages[i].gameObject.SetActive(true);
-                continue;
+                errorMessage = errorMessages[result.Pos];
+
+                if (result is NameValidationError.IsBlank)
+                {
+                    errorMessage.text = "Name cannot be blank!";
+                    errorMessage.gameObject.SetActive(true);
+                    continue;
+                }
+
+                if (result is NameValidationError.Clash)
+                {
+                    otherPos = (result as NameValidationError.Clash).WithPos + 1;
+                    errorMessage.text = $"Name cannot be the same as Player {otherPos}'s name";
+                    errorMessage.gameObject.SetActive(true);
+                }
             }
 
-            if (result is NameValidationResult.Clash)
-            {
-                areNamesValid = false;
-                otherPos = (result as NameValidationResult.Clash).Pos + 1;
-                errorMessages[i].text = $"Name cannot be the same as Player {otherPos}'s name";
-                errorMessages[i].gameObject.SetActive(true);
-            }
+            return;
         }
 
-        if (!areNamesValid) return;
         SceneManager.LoadScene("Game");
     }
 }
