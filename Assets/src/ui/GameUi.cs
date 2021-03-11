@@ -43,6 +43,26 @@ public class GameUi : MonoBehaviour
         rollDiceButton.interactable = true;
     }
 
+    public void ShowStockMarket()
+    {
+        // TODO: Show view stock market UI
+        Debug.Log("Launching stock market UI...");
+    }
+
+    public void ShowLeaderBoard()
+    {
+        // TODO: Show leaderboard UI
+        Debug.Log("Launching leaderboard Ui...");
+    }
+
+    // [NOTE] This function corresponds to clicking the end game button. This is NOT the same as
+    // the first player reaching 14 laps
+    public void OnEndGameButtonClick()
+    {
+        // TODO: Display confirmation message, then end game
+        Debug.Log("Ending game...");
+    }
+
     void LoadCurrentPlayerDetails()
     {
         Player currentPlayer = GameStore.CurrentPlayer;
@@ -66,24 +86,10 @@ public class GameUi : MonoBehaviour
         Debug.Log("Launching event UI...");
     }
 
-    void ShowStockMarket()
-    {
-        // TODO: Show view stock market UI
-        Debug.Log("Launching stock market UI...");
-    }
-
     void DisplayNews()
     {
         // TODO: Show news UI
         Debug.Log("Launching news UI...");
-    }
-
-    // [NOTE] This function corresponds to clicking the end game button. This is NOT the same as
-    // the first player reaching 14 laps
-    void OnEndGameButtonClick()
-    {
-        // TODO: Display confirmation message, then end game
-        Debug.Log("Ending game...");
     }
 
     void DisplayFinalScores()
@@ -94,12 +100,6 @@ public class GameUi : MonoBehaviour
         {
             Debug.Log($"Player[{player.Name}, ${player.Credit}]");
         }
-    }
-
-    void ShowLeaderBoard()
-    {
-        // TODO: Show leaderboard UI
-        Debug.Log("Launching leaderboard Ui...");
     }
 
     // Must be performed in coroutine to wait for piece to move before performing additional operations
