@@ -143,7 +143,6 @@ public class GameUi : MonoBehaviour
 
     void LoadPlayerCard()
     {
-        Vector3[] PlayerCardSmallVector = new Vector3[] { new Vector3(-400f, -90f, 0f), new Vector3(-400f, -180f, 0), new Vector3(-400f, -270f, 0), new Vector3(-400f, -360f, 0) };
         Color32[] cardColors = new Color32[] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
 
         Player player;
@@ -158,7 +157,7 @@ public class GameUi : MonoBehaviour
             smallPlayerCard.GetComponent<Image>().color = cardColors[i];
             smallPlayerCard.GetComponent<PlayerCardSmall>().playerNameText.text = player.Name;
             smallPlayerCard.GetComponent<PlayerCardSmall>().credits.text = player.Credit.ToString();
-            smallPlayerCard.GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[i];
+            smallPlayerCard.GetComponent<RectTransform>().localPosition = new Vector3(-400f, -90 * (i + 1), 0f);
 
             // Create big player card
             bigPlayerCard = Instantiate(PlayerCardBigPrefab);
