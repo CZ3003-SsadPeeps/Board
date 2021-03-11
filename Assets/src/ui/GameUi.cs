@@ -189,44 +189,53 @@ public class GameUi : MonoBehaviour
     void PopulatePlayerCard()
     {
         Transform parent = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
-        GameObject text;
+        GameObject textObject;
+        Text headerText;
 
         // Headers
-        text = Instantiate(TextPrefab);
-        text.transform.SetParent(parent, false);
-        text.GetComponent<Text>().text = "Company";
+        textObject = Instantiate(TextPrefab);
+        textObject.transform.SetParent(parent, false);
+        headerText = textObject.GetComponent<Text>();
+        headerText.fontStyle = FontStyle.Bold;
+        headerText.text = "Company";
 
-        text = Instantiate(TextPrefab);
-        text.transform.SetParent(parent, false);
-        text.GetComponent<Text>().text = "Quantity";
+        textObject = Instantiate(TextPrefab);
+        textObject.transform.SetParent(parent, false);
+        headerText = textObject.GetComponent<Text>();
+        headerText.fontStyle = FontStyle.Bold;
+        headerText.text = "Quantity";
 
-        text = Instantiate(TextPrefab);
-        text.transform.SetParent(parent, false);
-        text.GetComponent<Text>().text = "Average Purchase Price";
+        textObject = Instantiate(TextPrefab);
+        textObject.transform.SetParent(parent, false);
+        headerText = textObject.GetComponent<Text>();
+        headerText.fontStyle = FontStyle.Bold;
+        headerText.text = "Average Purchase Price";
 
-        text = Instantiate(TextPrefab);
-        text.transform.SetParent(parent, false);
-        text.GetComponent<Text>().text = "Current Stock Price";
+        textObject = Instantiate(TextPrefab);
+        textObject.transform.SetParent(parent, false);
+        headerText = textObject.GetComponent<Text>();
+        headerText.fontStyle = FontStyle.Bold;
+        headerText.text = "Current Stock Price";
 
         // Stock info
         List<PlayerStock> stocks = controller.GetPlayerStocks();
         foreach (PlayerStock stock in stocks)
         {
-            text = Instantiate(TextPrefab);
-            text.transform.SetParent(parent, false);
-            text.GetComponent<Text>().text = stock.CompanyName;
+            textObject = Instantiate(TextPrefab);
+            textObject.transform.SetParent(parent, false);
+            textObject.GetComponent<Text>().text = stock.CompanyName;
             
-            text = Instantiate(TextPrefab);
-            text.transform.SetParent(parent, false);
-            text.GetComponent<Text>().text = stock.Quantity.ToString();
+            textObject = Instantiate(TextPrefab);
+            textObject.transform.SetParent(parent, false);
+            textObject.GetComponent<Text>().text = stock.Quantity.ToString();
             
-            text = Instantiate(TextPrefab);
-            text.transform.SetParent(parent, false);
-            text.GetComponent<Text>().text = stock.AvgPurchasePrice.ToString();
+            textObject = Instantiate(TextPrefab);
+            textObject.transform.SetParent(parent, false);
+            textObject.GetComponent<Text>().text = $"${stock.AvgPurchasePrice}";
             
-            text = Instantiate(TextPrefab);
-            text.transform.SetParent(parent, false);
-            text.GetComponent<Text>().text = stock.CurrentStockPrice.ToString();
+            textObject = Instantiate(TextPrefab);
+            textObject.transform.SetParent(parent, false);
+            textObject.GetComponent<Text>().text = $"${stock.CurrentStockPrice}";
         }
     }
 }
