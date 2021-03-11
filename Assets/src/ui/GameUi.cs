@@ -17,7 +17,7 @@ public class GameUi : MonoBehaviour
 
     void Start()
     {
-        LoadPlayerCard();
+        GeneratePlayerCards();
         LoadCurrentPlayerDetails();
     }
 
@@ -47,8 +47,7 @@ public class GameUi : MonoBehaviour
     {
         Player currentPlayer = GameStore.CurrentPlayer;
         Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
-        MovePlayerCard();
-        PopulatePlayerCard();
+        DisplayCurrentPlayerDetails();
 
         // Select player's piece
         board.SetSelectedPiece(GameStore.CurrentPlayerPos);
@@ -141,7 +140,7 @@ public class GameUi : MonoBehaviour
         yield break;
     }
 
-    void LoadPlayerCard()
+    void GeneratePlayerCards()
     {
         Color32[] cardColors = new Color32[] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
 
@@ -170,10 +169,11 @@ public class GameUi : MonoBehaviour
         }
     }
 
-    void MovePlayerCard() //Cycles the player cards
+    void DisplayCurrentPlayerDetails() //Cycles the player cards
     {
         listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
         listPlayerCardsBig[GameStore.PrevPlayerPos].SetActive(false);
+        PopulatePlayerCard();
     }
 
     void PopulatePlayerCard()
