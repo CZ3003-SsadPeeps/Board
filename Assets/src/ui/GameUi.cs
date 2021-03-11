@@ -146,19 +146,28 @@ public class GameUi : MonoBehaviour
         Vector3[] PlayerCardSmallVector = new Vector3[] { new Vector3(-400f, -90f, 0f), new Vector3(-400f, -180f, 0), new Vector3(-400f, -270f, 0), new Vector3(-400f, -360f, 0) };
         Color32[] cardColors = new Color32[] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
 
+        Player player;
+        GameObject smallPlayerCard, bigPlayerCard;
         for (int i = 0; i < GameStore.Players.Length; i++)
         {
-            listPlayerCardsSmall.Add(Instantiate(PlayerCardSmallPrefab) as GameObject);
-            listPlayerCardsSmall[i].transform.SetParent(canvas.transform, false);
-            listPlayerCardsSmall[i].GetComponent<Image>().color = cardColors[i];
-            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().playerNameText.text = GameStore.Players[i].Name;
-            listPlayerCardsSmall[i].GetComponent<PlayerCardSmall>().credits.text = GameStore.Players[i].Credit.ToString();
-            listPlayerCardsSmall[i].GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[i];
+            player = GameStore.Players[i];
 
-            listPlayerCardsBig.Add(Instantiate(PlayerCardBigPrefab) as GameObject);
-            listPlayerCardsBig[i].transform.SetParent(canvas.transform, false);
-            listPlayerCardsBig[i].GetComponent<Image>().color = cardColors[i];
-            listPlayerCardsBig[i].SetActive(false);
+            // Create small player card
+            smallPlayerCard = Instantiate(PlayerCardSmallPrefab);
+            smallPlayerCard.transform.SetParent(canvas.transform, false);
+            smallPlayerCard.GetComponent<Image>().color = cardColors[i];
+            smallPlayerCard.GetComponent<PlayerCardSmall>().playerNameText.text = player.Name;
+            smallPlayerCard.GetComponent<PlayerCardSmall>().credits.text = player.Credit.ToString();
+            smallPlayerCard.GetComponent<RectTransform>().localPosition = PlayerCardSmallVector[i];
+
+            // Create big player card
+            bigPlayerCard = Instantiate(PlayerCardBigPrefab);
+            bigPlayerCard.transform.SetParent(canvas.transform, false);
+            bigPlayerCard.GetComponent<Image>().color = cardColors[i];
+            bigPlayerCard.SetActive(false);
+
+            listPlayerCardsSmall.Add(smallPlayerCard);
+            listPlayerCardsBig.Add(bigPlayerCard);
         }
     }
 
