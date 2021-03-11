@@ -143,7 +143,7 @@ public class GameUi : MonoBehaviour
 
     void LoadPlayerCard()
     {
-        Vector3[] PlayerCardSmallVector = new Vector3[] { new Vector3(-400f, -180f, 0f), new Vector3(-400f, -270f, 0), new Vector3(-400f, -360f, 0), new Vector3(-400f, -450f, 0) };
+        Vector3[] PlayerCardSmallVector = new Vector3[] { new Vector3(-400f, -90f, 0f), new Vector3(-400f, -180f, 0), new Vector3(-400f, -270f, 0), new Vector3(-400f, -360f, 0) };
         Color32[] cardColors = new Color32[] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
 
         for (int i = 0; i < GameStore.Players.Length; i++)
