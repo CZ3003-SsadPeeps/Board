@@ -145,27 +145,30 @@ public class GameUi : MonoBehaviour
         Color32[] cardColors = new Color32[] { new Color32(0, 0, 0, 50), new Color32(255, 0, 0, 50), new Color32(0, 255, 0, 50), new Color32(0, 0, 255, 50) };
 
         Player player;
-        GameObject smallPlayerCard, bigPlayerCard;
+        GameObject cardObject;
+        PlayerCardSmall smallPlayerCard;
         for (int i = 0; i < GameStore.Players.Length; i++)
         {
             player = GameStore.Players[i];
 
             // Create small player card
-            smallPlayerCard = Instantiate(PlayerCardSmallPrefab);
-            smallPlayerCard.transform.SetParent(canvas.transform, false);
-            smallPlayerCard.GetComponent<Image>().color = cardColors[i];
-            smallPlayerCard.GetComponent<PlayerCardSmall>().playerNameText.text = player.Name;
-            smallPlayerCard.GetComponent<PlayerCardSmall>().credits.text = player.Credit.ToString();
-            smallPlayerCard.GetComponent<RectTransform>().localPosition = new Vector3(-400f, -90 * (i + 1), 0f);
+            cardObject = Instantiate(PlayerCardSmallPrefab);
+            cardObject.transform.SetParent(canvas.transform, false);
+            cardObject.GetComponent<RectTransform>().localPosition = new Vector3(-400f, -90 * (i + 1), 0f);
+
+            smallPlayerCard = cardObject.GetComponent<PlayerCardSmall>();
+            smallPlayerCard.cardBackground.color = cardColors[i];
+            smallPlayerCard.playerNameText.text = player.Name;
+            smallPlayerCard.credits.text = player.Credit.ToString();
+
+            listPlayerCardsSmall.Add(cardObject);
 
             // Create big player card
-            bigPlayerCard = Instantiate(PlayerCardBigPrefab);
-            bigPlayerCard.transform.SetParent(canvas.transform, false);
-            bigPlayerCard.GetComponent<Image>().color = cardColors[i];
-            bigPlayerCard.SetActive(false);
-
-            listPlayerCardsSmall.Add(smallPlayerCard);
-            listPlayerCardsBig.Add(bigPlayerCard);
+            cardObject = Instantiate(PlayerCardBigPrefab);
+            cardObject.transform.SetParent(canvas.transform, false);
+            cardObject.GetComponent<Image>().color = cardColors[i];
+            cardObject.SetActive(false);
+            listPlayerCardsBig.Add(cardObject);
         }
     }
 
