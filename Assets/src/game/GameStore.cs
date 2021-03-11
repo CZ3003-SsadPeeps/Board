@@ -8,6 +8,14 @@
 
     public static int CurrentPlayerPos { get; private set; } = 0;
 
+    public static int PrevPlayerPos
+    {
+        get
+        {
+            return (CurrentPlayerPos == 0 ? Players.Length : CurrentPlayerPos) - 1;
+        }
+    }
+
     public static void InitPlayers(string[] names)
     {
         Players = new Player[names.Length];
