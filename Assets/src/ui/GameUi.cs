@@ -192,39 +192,25 @@ public class GameUi : MonoBehaviour
         List<PlayerStock> stocks = controller.GetPlayerStocks();
 
         Transform parent = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().content;
-        GameObject text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
-        text = Instantiate(TextPrefab) as GameObject;
-        text.transform.SetParent(parent, false);
+
+        GameObject text;
+        foreach (PlayerStock stock in stocks)
+        {
+            text = Instantiate(TextPrefab);
+            text.transform.SetParent(parent, false);
+            text.GetComponent<Text>().text = stock.CompanyName;
+            
+            text = Instantiate(TextPrefab);
+            text.transform.SetParent(parent, false);
+            text.GetComponent<Text>().text = stock.Quantity.ToString();
+            
+            text = Instantiate(TextPrefab);
+            text.transform.SetParent(parent, false);
+            text.GetComponent<Text>().text = stock.AvgPurchasePrice.ToString();
+            
+            text = Instantiate(TextPrefab);
+            text.transform.SetParent(parent, false);
+            text.GetComponent<Text>().text = stock.CurrentStockPrice.ToString();
+        }
     }
 }
