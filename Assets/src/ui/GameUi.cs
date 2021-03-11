@@ -174,7 +174,10 @@ public class GameUi : MonoBehaviour
 
     void DisplayCurrentPlayerDetails() //Cycles the player cards
     {
+        listPlayerCardsSmall[GameStore.CurrentPlayerPos].GetComponent<PlayerCardSmall>().selectionBackground.gameObject.SetActive(true);
         listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
+
+        listPlayerCardsSmall[GameStore.PrevPlayerPos].GetComponent<PlayerCardSmall>().selectionBackground.gameObject.SetActive(false);
         listPlayerCardsBig[GameStore.PrevPlayerPos].SetActive(false);
         PopulatePlayerCard();
     }
