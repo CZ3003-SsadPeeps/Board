@@ -91,6 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 1880976816867798902}
   scrollView: {fileID: 2925629806236768057}
+  TextPrefab: {fileID: 6019263639368663799, guid: 9e56d952e69aa9c4bb298d72b823de03,
+    type: 3}
   content: {fileID: 2925629805771971790}
 --- !u!1 &2925629805643776840
 GameObject:

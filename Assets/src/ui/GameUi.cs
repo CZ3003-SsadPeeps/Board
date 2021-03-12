@@ -189,7 +189,7 @@ public class GameUi : MonoBehaviour
             cardObject.SetActive(false);
 
             bigPlayerCard = cardObject.GetComponent<PlayerCardBig>();
-            bigPlayerCard.playerNameText.text = player.Name;
+            bigPlayerCard.SetPlayerName(player.Name);
             listPlayerCardsBig.Add(cardObject);
         }
     }
@@ -206,60 +206,9 @@ public class GameUi : MonoBehaviour
 
     void PopulatePlayerCard()
     {
-        PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
-
-        Transform parent = playerCard.content;
-        GameObject textObject;
-        Text headerText;
-
-        // Headers
-        textObject = Instantiate(TextPrefab);
-        textObject.transform.SetParent(parent, false);
-        headerText = textObject.GetComponent<Text>();
-        headerText.fontStyle = FontStyle.Bold;
-        headerText.text = "Company";
-
-        textObject = Instantiate(TextPrefab);
-        textObject.transform.SetParent(parent, false);
-        headerText = textObject.GetComponent<Text>();
-        headerText.fontStyle = FontStyle.Bold;
-        headerText.text = "Quantity";
-
-        textObject = Instantiate(TextPrefab);
-        textObject.transform.SetParent(parent, false);
-        headerText = textObject.GetComponent<Text>();
-        headerText.fontStyle = FontStyle.Bold;
-        headerText.text = "Average Purchase Price";
-
-        textObject = Instantiate(TextPrefab);
-        textObject.transform.SetParent(parent, false);
-        headerText = textObject.GetComponent<Text>();
-        headerText.fontStyle = FontStyle.Bold;
-        headerText.text = "Current Stock Price";
-
-        // Stock info
         List<PlayerStock> stocks = controller.GetPlayerStocks();
-        foreach (PlayerStock stock in stocks)
-        {
-            textObject = Instantiate(TextPrefab);
-            textObject.transform.SetParent(parent, false);
-            textObject.GetComponent<Text>().text = stock.CompanyName;
-            
-            textObject = Instantiate(TextPrefab);
-            textObject.transform.SetParent(parent, false);
-            textObject.GetComponent<Text>().text = stock.Quantity.ToString();
-            
-            textObject = Instantiate(TextPrefab);
-            textObject.transform.SetParent(parent, false);
-            textObject.GetComponent<Text>().text = $"${stock.AvgPurchasePrice}";
-            
-            textObject = Instantiate(TextPrefab);
-            textObject.transform.SetParent(parent, false);
-            textObject.GetComponent<Text>().text = $"${stock.CurrentStockPrice}";
-        }
-
-        // Scroll layout by default scrolls to the middle of the list, so must scroll back to top
-        playerCard.scrollView.normalizedPosition = new Vector2(0, 1);
+        PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
+        playerCard.SetStockDetails(stocks);
     }
 
     IEnumerator MovePopupToPos(RectTransform goPopupTransform, Vector2 targetPos)
