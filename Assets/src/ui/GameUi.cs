@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class GameUi : MonoBehaviour
 {
+    static readonly Color32[] CARD_COLORS = new Color32[] {
+        new Color32(240, 98, 146, 255),
+        new Color32(186, 102, 199, 255),
+        new Color32(125, 133, 201, 255),
+        new Color32(145, 164, 174, 255)
+    };
+
     public Board board;
     public Canvas canvas;
     public Button rollDiceButton, endTurnButton;
@@ -76,7 +83,19 @@ public class GameUi : MonoBehaviour
     {
         Player currentPlayer = GameStore.CurrentPlayer;
         Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
-        DisplayCurrentPlayerDetails();
+
+        listPlayerCardsSmall[GameStore.PrevPlayerPos].GetComponent<PlayerCardSmall>().SetSelected(false);
+        listPlayerCardsBig[GameStore.PrevPlayerPos].SetActive(false);
+
+        // Reload player details in case number of credits change
+        PlayerCardSmall smallPlayerCard = listPlayerCardsSmall[GameStore.CurrentPlayerPos].GetComponent<PlayerCardSmall>();
+        smallPlayerCard.SetSelected(true);
+        smallPlayerCard.SetPlayerDetails(currentPlayer, CARD_COLORS[GameStore.CurrentPlayerPos]);
+
+        listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
+        List<PlayerStock> stocks = controller.GetPlayerStocks();
+        PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
+        playerCard.SetStockDetails(stocks);
 
         // Select player's piece
         board.SetSelectedPiece(GameStore.CurrentPlayerPos);
@@ -160,8 +179,6 @@ public class GameUi : MonoBehaviour
 
     void GeneratePlayerCards()
     {
-        Color32[] cardColors = new Color32[] { new Color32(240, 98, 146, 255), new Color32(186, 102, 199, 255), new Color32(125, 133, 201, 255), new Color32(145, 164, 174, 255) };
-
         Player player;
         GameObject cardObject;
         PlayerCardSmall smallPlayerCard;
@@ -176,36 +193,19 @@ public class GameUi : MonoBehaviour
             cardObject.GetComponent<RectTransform>().localPosition = new Vector3(-400f, -90 * (i + 1), 0f);
 
             smallPlayerCard = cardObject.GetComponent<PlayerCardSmall>();
-            smallPlayerCard.SetPlayerDetails(player, cardColors[i]);
+            smallPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
             listPlayerCardsSmall.Add(cardObject);
 
             // Create big player card
             cardObject = Instantiate(PlayerCardBigPrefab);
             cardObject.transform.SetParent(canvas.transform, false);
-            cardObject.GetComponent<Image>().color = cardColors[i];
+            cardObject.GetComponent<Image>().color = CARD_COLORS[i];
             cardObject.SetActive(false);
 
             bigPlayerCard = cardObject.GetComponent<PlayerCardBig>();
             bigPlayerCard.SetPlayerName(player.Name);
             listPlayerCardsBig.Add(cardObject);
         }
-    }
-
-    void DisplayCurrentPlayerDetails() //Cycles the player cards
-    {
-        listPlayerCardsSmall[GameStore.CurrentPlayerPos].GetComponent<PlayerCardSmall>().selectionBackground.gameObject.SetActive(true);
-        listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
-
-        listPlayerCardsSmall[GameStore.PrevPlayerPos].GetComponent<PlayerCardSmall>().selectionBackground.gameObject.SetActive(false);
-        listPlayerCardsBig[GameStore.PrevPlayerPos].SetActive(false);
-        PopulatePlayerCard();
-    }
-
-    void PopulatePlayerCard()
-    {
-        List<PlayerStock> stocks = controller.GetPlayerStocks();
-        PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
-        playerCard.SetStockDetails(stocks);
     }
 
     IEnumerator MovePopupToPos(RectTransform goPopupTransform, Vector2 targetPos)

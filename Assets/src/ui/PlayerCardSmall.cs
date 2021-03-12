@@ -13,4 +13,9 @@ public class PlayerCardSmall : MonoBehaviour
         credits.text = $"${player.Credit}";
         cardBackground.color = backgroundColor;
     }
+
+    internal void SetSelected(bool isSelected)
+    {
+        selectionBackground.gameObject.SetActive(isSelected);
+    }
 }
