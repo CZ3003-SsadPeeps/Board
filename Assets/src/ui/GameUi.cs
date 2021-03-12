@@ -8,7 +8,7 @@ public class GameUi : MonoBehaviour
     public Board board;
     public Canvas canvas;
     public Button rollDiceButton, endTurnButton;
-    public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab, TextPrefab;
+    public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab;
     // Velocity defined here because argument for popup movement requires reference to variable to modify it
     // Also making it public sets it default value to [0, 0]
     public Vector2 popupVelocity;
