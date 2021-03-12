@@ -9,6 +9,9 @@ public class GameUi : MonoBehaviour
     public Canvas canvas;
     public Button rollDiceButton, endTurnButton;
     public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab, TextPrefab;
+    // Velocity defined here because argument for popup movement requires reference to variable to modify it
+    // Also making it public sets it default value to [0, 0]
+    public Vector2 popupVelocity;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
     GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
@@ -126,11 +129,12 @@ public class GameUi : MonoBehaviour
 
             // Display passed GO popup
             RectTransform goPopupTransform = passedGoPopup.GetComponent<RectTransform>();
-            Vector3 prevPos = goPopupTransform.anchoredPosition;
-            goPopupTransform.anchoredPosition = new Vector3(prevPos.x, prevPos.y + 760, prevPos.z);
+            Vector2 hiddenPos = goPopupTransform.anchoredPosition;
+            Vector2 displayPos = new Vector2(hiddenPos.x, hiddenPos.y + 760);
 
-            yield return new WaitForSeconds(2.5f);
-            goPopupTransform.anchoredPosition = prevPos;
+            yield return StartCoroutine(MovePopupToPos(goPopupTransform, displayPos));
+            yield return new WaitForSeconds(3f);
+            yield return StartCoroutine(MovePopupToPos(goPopupTransform, hiddenPos));
 
             Debug.Log("Received GO payout");
         }
@@ -256,5 +260,16 @@ public class GameUi : MonoBehaviour
 
         // Scroll layout by default scrolls to the middle of the list, so must scroll back to top
         playerCard.scrollView.normalizedPosition = new Vector2(0, 1);
+    }
+
+    IEnumerator MovePopupToPos(RectTransform goPopupTransform, Vector2 targetPos)
+    {
+        do
+        {
+            // Current position must be passed using RectTransform property. Otherwise popup will keep jumping back & forth between current & target positions
+            goPopupTransform.anchoredPosition = Vector2.SmoothDamp(goPopupTransform.anchoredPosition, targetPos, ref popupVelocity, 0.15f);
+            yield return null;
+        } while (goPopupTransform.anchoredPosition != targetPos);
+        yield break;
     }
 }
