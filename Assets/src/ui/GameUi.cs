@@ -8,7 +8,7 @@ public class GameUi : MonoBehaviour
     public Board board;
     public Canvas canvas;
     public Button rollDiceButton, endTurnButton;
-    public GameObject PlayerCardSmallPrefab, PlayerCardBigPrefab, TextPrefab;
+    public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab, TextPrefab;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
     GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
