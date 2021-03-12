@@ -20,6 +20,10 @@ public class GameUi : MonoBehaviour
         // Uncomment when testing Game UI only
         //GameStore.InitPlayers(new string[] { "Abu", "Banana", "Cherry", "Mewtwo" });
         GeneratePlayerCards();
+
+        // Ensures popup is displayed on top of everything else. Must be done after player cards are generated
+        passedGoPopup.transform.SetAsLastSibling();
+
         LoadCurrentPlayerDetails();
     }
 
