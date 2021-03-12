@@ -16,7 +16,7 @@ public class PlayerCardBig : MonoBehaviour
 
     internal void SetStockDetails(List<PlayerStock> stocks)
     {
-`       //Remove existing stock info
+       //Remove existing stock info
         content.DetachChildren();
 
         GameObject textObject;
