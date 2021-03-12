@@ -16,9 +16,6 @@ public class GameUi : MonoBehaviour
     public Canvas canvas;
     public Button rollDiceButton, endTurnButton;
     public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab;
-    // Velocity defined here because argument for popup movement requires reference to variable to modify it
-    // Also making it public sets it default value to [0, 0]
-    public Vector2 popupVelocity;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
     GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
@@ -148,12 +145,10 @@ public class GameUi : MonoBehaviour
 
             // Display passed GO popup
             RectTransform goPopupTransform = passedGoPopup.GetComponent<RectTransform>();
-            Vector2 hiddenPos = goPopupTransform.anchoredPosition;
-            Vector2 displayPos = new Vector2(hiddenPos.x, hiddenPos.y + 760);
 
-            yield return StartCoroutine(MovePopupToPos(goPopupTransform, displayPos));
+            yield return StartCoroutine(MovePopupToPos(goPopupTransform, Vector2.zero));
             yield return new WaitForSeconds(3f);
-            yield return StartCoroutine(MovePopupToPos(goPopupTransform, hiddenPos));
+            yield return StartCoroutine(MovePopupToPos(goPopupTransform, new Vector2(0f, -760f)));
 
             Debug.Log("Received GO payout");
         }
@@ -213,7 +208,7 @@ public class GameUi : MonoBehaviour
         do
         {
             // Current position must be passed using RectTransform property. Otherwise popup will keep jumping back & forth between current & target positions
-            goPopupTransform.anchoredPosition = Vector2.SmoothDamp(goPopupTransform.anchoredPosition, targetPos, ref popupVelocity, 0.15f);
+            goPopupTransform.anchoredPosition = Vector2.MoveTowards(goPopupTransform.anchoredPosition, targetPos, 10f);
             yield return null;
         } while (goPopupTransform.anchoredPosition != targetPos);
         yield break;
