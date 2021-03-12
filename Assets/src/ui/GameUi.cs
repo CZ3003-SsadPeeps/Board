@@ -176,10 +176,7 @@ public class GameUi : MonoBehaviour
             cardObject.GetComponent<RectTransform>().localPosition = new Vector3(-400f, -90 * (i + 1), 0f);
 
             smallPlayerCard = cardObject.GetComponent<PlayerCardSmall>();
-            smallPlayerCard.cardBackground.color = cardColors[i];
-            smallPlayerCard.playerNameText.text = player.Name;
-            smallPlayerCard.credits.text = player.Credit.ToString();
-
+            smallPlayerCard.SetPlayerDetails(player, cardColors[i]);
             listPlayerCardsSmall.Add(cardObject);
 
             // Create big player card
