@@ -15,6 +15,8 @@ public class GameUi : MonoBehaviour
     public Board board;
     public Canvas canvas;
     public Button rollDiceButton, endTurnButton, leaderboardButton, homeButton;
+    public Text endGameText;
+    public Image endGameBackground;
     public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
@@ -56,6 +58,8 @@ public class GameUi : MonoBehaviour
             rollDiceButton.gameObject.SetActive(false);
             endTurnButton.gameObject.SetActive(false);
 
+            endGameBackground.gameObject.SetActive(true);
+            endGameText.gameObject.SetActive(true);
             leaderboardButton.gameObject.SetActive(true);
             homeButton.gameObject.SetActive(true);
 
