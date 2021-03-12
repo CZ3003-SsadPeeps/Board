@@ -43,6 +43,15 @@ public class GameUi : MonoBehaviour
     {
         if (board.HasReachedMaxLaps())
         {
+            listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(false);
+
+            GameObject smallPlayerCard;
+            for (int i = 0; i < listPlayerCardsSmall.Count; i++)
+            {
+                smallPlayerCard = listPlayerCardsSmall[i];
+                smallPlayerCard.GetComponent<RectTransform>().localPosition = new Vector3(-300 + (200 * i), -180, 0f);
+            }
+
             // Disable all buttons except leaderboard & back
             rollDiceButton.gameObject.SetActive(false);
             endTurnButton.gameObject.SetActive(false);
