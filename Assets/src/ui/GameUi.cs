@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameUi : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class GameUi : MonoBehaviour
 
     public Board board;
     public Canvas canvas;
-    public Button rollDiceButton, endTurnButton;
+    public Button rollDiceButton, endTurnButton, leaderboardButton, homeButton;
+    public Text endGameText;
+    public Image endGameBackground;
     public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
@@ -43,7 +46,24 @@ public class GameUi : MonoBehaviour
     {
         if (board.HasReachedMaxLaps())
         {
-            // TODO: Disable all buttons except leaderboard & back
+            listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(false);
+
+            GameObject smallPlayerCard;
+            for (int i = 0; i < listPlayerCardsSmall.Count; i++)
+            {
+                smallPlayerCard = listPlayerCardsSmall[i];
+                smallPlayerCard.GetComponent<RectTransform>().localPosition = new Vector3(-300 + (200 * i), -180, 0f);
+            }
+
+            // Disable all buttons except leaderboard & back
+            rollDiceButton.gameObject.SetActive(false);
+            endTurnButton.gameObject.SetActive(false);
+
+            endGameBackground.gameObject.SetActive(true);
+            endGameText.gameObject.SetActive(true);
+            leaderboardButton.gameObject.SetActive(true);
+            homeButton.gameObject.SetActive(true);
+
             controller.SavePlayerScores();
             DisplayFinalScores();
             return;
@@ -60,6 +80,11 @@ public class GameUi : MonoBehaviour
     {
         // TODO: Show view stock market UI
         Debug.Log("Launching stock market UI...");
+    }
+
+    public void OnHomeButtonClick()
+    {
+        SceneManager.LoadScene("Home");
     }
 
     public void ShowLeaderBoard()
