@@ -17,6 +17,8 @@ public class GameUi : MonoBehaviour
 
     void Start()
     {
+        // Uncomment when testing Game UI only
+        //GameStore.InitPlayers(new string[] { "Abu", "Banana", "Cherry", "Mewtwo" });
         GeneratePlayerCards();
         LoadCurrentPlayerDetails();
     }
