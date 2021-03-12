@@ -412,7 +412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &387187448
 RectTransform:
   m_ObjectHideFlags: 0
@@ -794,6 +794,8 @@ MonoBehaviour:
   canvas: {fileID: 1134043460}
   rollDiceButton: {fileID: 1162998037}
   endTurnButton: {fileID: 398047795}
+  leaderboardButton: {fileID: 0}
+  homeButton: {fileID: 0}
   passedGoPopup: {fileID: 667464219}
   PlayerCardSmallPrefab: {fileID: 2336208187690542602, guid: d8a276fe357eec74bb51ef64543ddf2e,
     type: 3}
@@ -831,7 +833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &616183905
 RectTransform:
   m_ObjectHideFlags: 0
