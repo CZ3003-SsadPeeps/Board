@@ -119,7 +119,15 @@ public class GameUi : MonoBehaviour
         if (currentPiecePos < diceValue)
         {
             controller.IssueGoPayout();
-            // TODO: Display GO payout
+
+            // Display passed GO popup
+            RectTransform goPopupTransform = passedGoPopup.GetComponent<RectTransform>();
+            Vector3 prevPos = goPopupTransform.anchoredPosition;
+            goPopupTransform.anchoredPosition = new Vector3(prevPos.x, prevPos.y + 760, prevPos.z);
+
+            yield return new WaitForSeconds(2.5f);
+            goPopupTransform.anchoredPosition = prevPos;
+
             Debug.Log("Received GO payout");
         }
 
