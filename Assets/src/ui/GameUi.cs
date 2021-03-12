@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameUi : MonoBehaviour
 {
@@ -79,6 +80,11 @@ public class GameUi : MonoBehaviour
     {
         // TODO: Show view stock market UI
         Debug.Log("Launching stock market UI...");
+    }
+
+    public void OnHomeButtonClick()
+    {
+        SceneManager.LoadScene("Home");
     }
 
     public void ShowLeaderBoard()
