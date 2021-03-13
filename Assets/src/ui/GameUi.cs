@@ -59,7 +59,7 @@ public class GameUi : MonoBehaviour
             for (int i = 0; i < listPlayerCardsSmall.Count; i++)
             {
                 smallPlayerCard = listPlayerCardsSmall[i];
-                smallPlayerCard.GetComponent<RectTransform>().localPosition = new Vector3(-300 + (200 * i), -180, 0f);
+                smallPlayerCard.GetComponent<PlayerCardSmall>().SetPosition(new Vector3(-300 + (200 * i), -180, 0f));
             }
 
             // Disable all buttons except leaderboard & back
@@ -216,9 +216,9 @@ public class GameUi : MonoBehaviour
             // Create small player card
             cardObject = Instantiate(PlayerCardSmallPrefab);
             cardObject.transform.SetParent(canvas.transform, false);
-            cardObject.GetComponent<RectTransform>().localPosition = new Vector3(-400f, -90 * (i + 1), 0f);
 
             smallPlayerCard = cardObject.GetComponent<PlayerCardSmall>();
+            smallPlayerCard.SetPosition(new Vector3(-400f, -90 * (i + 1), 0f));
             smallPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
             listPlayerCardsSmall.Add(cardObject);
 
