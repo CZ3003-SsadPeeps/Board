@@ -25,6 +25,8 @@ public class GameUi : MonoBehaviour
     List<PlayerCardSmall> smallPlayerCards = new List<PlayerCardSmall>(4);
     List<PlayerCardBig> bigPlayerCards = new List<PlayerCardBig>(4);
 
+    bool shouldUpdateStock = false;
+
     void Start()
     {
         // Uncomment when testing Game UI only
@@ -41,7 +43,15 @@ public class GameUi : MonoBehaviour
     {
         int currentPlayerCredit = GameStore.CurrentPlayer.Credit;
         smallPlayerCards[GameStore.CurrentPlayerPos].SetCredit(currentPlayerCredit);
-        bigPlayerCards[GameStore.CurrentPlayerPos].SetCredit(currentPlayerCredit);
+
+        PlayerCardBig bigPlayerCard = bigPlayerCards[GameStore.CurrentPlayerPos];
+        bigPlayerCard.SetCredit(currentPlayerCredit);
+        // This operation is pretty expensive, so will only be done when while user is in stock market UI
+        if (shouldUpdateStock)
+        {
+            List<PlayerStock> stocks = controller.GetPlayerStocks();
+            bigPlayerCard.SetStockDetails(stocks);
+        }
     }
 
     public void RollDice()
@@ -83,6 +93,7 @@ public class GameUi : MonoBehaviour
 
     public void ShowStockMarket()
     {
+        shouldUpdateStock = true;
         // TODO: Show view stock market UI
         Debug.Log("Launching stock market UI...");
     }
@@ -115,10 +126,12 @@ public class GameUi : MonoBehaviour
         bigPlayerCards[GameStore.PrevPlayerPos].SetVisible(false);
 
         smallPlayerCards[GameStore.CurrentPlayerPos].SetSelected(true);
-        bigPlayerCards[GameStore.CurrentPlayerPos].SetVisible(true);
+        PlayerCardBig bigPlayerCard = bigPlayerCards[GameStore.CurrentPlayerPos];
+        bigPlayerCard.SetVisible(true);
+
+        // Ensures user has the latest stock prices
         List<PlayerStock> stocks = controller.GetPlayerStocks();
-        PlayerCardBig playerCard = bigPlayerCards[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
-        playerCard.SetStockDetails(stocks);
+        bigPlayerCard.SetStockDetails(stocks);
 
         // Select player's piece
         board.SetSelectedPiece(GameStore.CurrentPlayerPos);
@@ -222,8 +235,10 @@ public class GameUi : MonoBehaviour
             cardObject.transform.SetParent(canvas.transform, false);
             cardObject.SetActive(false);
 
+            List<PlayerStock> stocks = controller.GetPlayerStocks();
             bigPlayerCard = cardObject.GetComponent<PlayerCardBig>();
             bigPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
+            bigPlayerCard.SetStockDetails(stocks);
             bigPlayerCards.Add(bigPlayerCard);
         }
     }
