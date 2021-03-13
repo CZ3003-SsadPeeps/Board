@@ -22,8 +22,8 @@ public class GameUi : MonoBehaviour
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
     GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
-    List<GameObject> listPlayerCardsSmall = new List<GameObject>();
-    List<GameObject> listPlayerCardsBig = new List<GameObject>();
+    List<PlayerCardSmall> smallPlayerCards = new List<PlayerCardSmall>(4);
+    List<PlayerCardBig> bigPlayerCards = new List<PlayerCardBig>(4);
 
     void Start()
     {
@@ -40,8 +40,8 @@ public class GameUi : MonoBehaviour
     void Update()
     {
         int currentPlayerCredit = GameStore.CurrentPlayer.Credit;
-        listPlayerCardsSmall[GameStore.CurrentPlayerPos].GetComponent<PlayerCardSmall>().SetCredit(currentPlayerCredit);
-        listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().SetCredit(currentPlayerCredit);
+        smallPlayerCards[GameStore.CurrentPlayerPos].SetCredit(currentPlayerCredit);
+        bigPlayerCards[GameStore.CurrentPlayerPos].SetCredit(currentPlayerCredit);
     }
 
     public void RollDice()
@@ -53,13 +53,11 @@ public class GameUi : MonoBehaviour
     {
         if (board.HasReachedMaxLaps())
         {
-            listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(false);
+            bigPlayerCards[GameStore.CurrentPlayerPos].gameObject.SetActive(false);
 
-            GameObject smallPlayerCard;
-            for (int i = 0; i < listPlayerCardsSmall.Count; i++)
+            for (int i = 0; i < smallPlayerCards.Count; i++)
             {
-                smallPlayerCard = listPlayerCardsSmall[i];
-                smallPlayerCard.GetComponent<PlayerCardSmall>().SetPosition(new Vector3(-300 + (200 * i), -180, 0f));
+                smallPlayerCards[i].SetPosition(new Vector3(-300 + (200 * i), -180, 0f));
             }
 
             // Disable all buttons except leaderboard & back
@@ -113,16 +111,15 @@ public class GameUi : MonoBehaviour
         Player currentPlayer = GameStore.CurrentPlayer;
         Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
 
-        listPlayerCardsSmall[GameStore.PrevPlayerPos].GetComponent<PlayerCardSmall>().SetSelected(false);
-        listPlayerCardsBig[GameStore.PrevPlayerPos].SetActive(false);
+        smallPlayerCards[GameStore.PrevPlayerPos].SetSelected(false);
+        bigPlayerCards[GameStore.PrevPlayerPos].gameObject.SetActive(false);
 
         // Reload player details in case number of credits change
-        PlayerCardSmall smallPlayerCard = listPlayerCardsSmall[GameStore.CurrentPlayerPos].GetComponent<PlayerCardSmall>();
-        smallPlayerCard.SetSelected(true);
+        smallPlayerCards[GameStore.CurrentPlayerPos].SetSelected(true);
 
-        listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
+        bigPlayerCards[GameStore.CurrentPlayerPos].gameObject.SetActive(true);
         List<PlayerStock> stocks = controller.GetPlayerStocks();
-        PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
+        PlayerCardBig playerCard = bigPlayerCards[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
         playerCard.SetStockDetails(stocks);
 
         // Select player's piece
@@ -220,7 +217,7 @@ public class GameUi : MonoBehaviour
             smallPlayerCard = cardObject.GetComponent<PlayerCardSmall>();
             smallPlayerCard.SetPosition(new Vector3(-400f, -90 * (i + 1), 0f));
             smallPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
-            listPlayerCardsSmall.Add(cardObject);
+            smallPlayerCards.Add(smallPlayerCard);
 
             // Create big player card
             cardObject = Instantiate(PlayerCardBigPrefab);
@@ -229,7 +226,7 @@ public class GameUi : MonoBehaviour
 
             bigPlayerCard = cardObject.GetComponent<PlayerCardBig>();
             bigPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
-            listPlayerCardsBig.Add(cardObject);
+            bigPlayerCards.Add(bigPlayerCard);
         }
     }
 
