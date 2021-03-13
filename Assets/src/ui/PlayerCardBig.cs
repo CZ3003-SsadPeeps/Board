@@ -8,6 +8,11 @@ public class PlayerCardBig : PlayerCard
     public GameObject TextPrefab;
     public Transform content;
 
+    internal void SetVisible(bool isVisible)
+    {
+        gameObject.SetActive(isVisible);
+    }
+
     internal void SetStockDetails(List<PlayerStock> stocks)
     {
        //Remove existing stock info

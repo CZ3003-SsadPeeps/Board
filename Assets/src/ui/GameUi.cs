@@ -53,7 +53,7 @@ public class GameUi : MonoBehaviour
     {
         if (board.HasReachedMaxLaps())
         {
-            bigPlayerCards[GameStore.CurrentPlayerPos].gameObject.SetActive(false);
+            bigPlayerCards[GameStore.CurrentPlayerPos].SetVisible(false);
 
             for (int i = 0; i < smallPlayerCards.Count; i++)
             {
@@ -112,12 +112,10 @@ public class GameUi : MonoBehaviour
         Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
 
         smallPlayerCards[GameStore.PrevPlayerPos].SetSelected(false);
-        bigPlayerCards[GameStore.PrevPlayerPos].gameObject.SetActive(false);
+        bigPlayerCards[GameStore.PrevPlayerPos].SetVisible(false);
 
-        // Reload player details in case number of credits change
         smallPlayerCards[GameStore.CurrentPlayerPos].SetSelected(true);
-
-        bigPlayerCards[GameStore.CurrentPlayerPos].gameObject.SetActive(true);
+        bigPlayerCards[GameStore.CurrentPlayerPos].SetVisible(true);
         List<PlayerStock> stocks = controller.GetPlayerStocks();
         PlayerCardBig playerCard = bigPlayerCards[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
         playerCard.SetStockDetails(stocks);
