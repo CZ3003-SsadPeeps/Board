@@ -28,13 +28,20 @@ public class GameUi : MonoBehaviour
     void Start()
     {
         // Uncomment when testing Game UI only
-        GameStore.InitPlayers(new string[] { "Abu", "Banana", "Cherry", "Mewtwo" });
+        //GameStore.InitPlayers(new string[] { "Abu", "Banana", "Cherry", "Mewtwo" });
         GeneratePlayerCards();
 
         // Ensures popup is displayed on top of everything else. Must be done after player cards are generated
         passedGoPopup.transform.SetAsLastSibling();
 
         LoadCurrentPlayerDetails();
+    }
+
+    void Update()
+    {
+        int currentPlayerCredit = GameStore.CurrentPlayer.Credit;
+        listPlayerCardsSmall[GameStore.CurrentPlayerPos].GetComponent<PlayerCardSmall>().SetCredit(currentPlayerCredit);
+        listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>().SetCredit(currentPlayerCredit);
     }
 
     public void RollDice()
@@ -112,12 +119,10 @@ public class GameUi : MonoBehaviour
         // Reload player details in case number of credits change
         PlayerCardSmall smallPlayerCard = listPlayerCardsSmall[GameStore.CurrentPlayerPos].GetComponent<PlayerCardSmall>();
         smallPlayerCard.SetSelected(true);
-        smallPlayerCard.SetPlayerDetails(currentPlayer, CARD_COLORS[GameStore.CurrentPlayerPos]);
 
         listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
         List<PlayerStock> stocks = controller.GetPlayerStocks();
         PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
-        playerCard.SetPlayerCredit(currentPlayer.Credit);
         playerCard.SetStockDetails(stocks);
 
         // Select player's piece
@@ -220,11 +225,10 @@ public class GameUi : MonoBehaviour
             // Create big player card
             cardObject = Instantiate(PlayerCardBigPrefab);
             cardObject.transform.SetParent(canvas.transform, false);
-            cardObject.GetComponent<Image>().color = CARD_COLORS[i];
             cardObject.SetActive(false);
 
             bigPlayerCard = cardObject.GetComponent<PlayerCardBig>();
-            bigPlayerCard.SetPlayerName(player.Name);
+            bigPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
             listPlayerCardsBig.Add(cardObject);
         }
     }
