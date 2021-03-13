@@ -802,8 +802,6 @@ MonoBehaviour:
   passedGoPopup: {fileID: 667464219}
   PlayerCardSmallPrefab: {fileID: 2336208187690542602, guid: d8a276fe357eec74bb51ef64543ddf2e,
     type: 3}
-  PlayerCardBigPrefab: {fileID: 2925629804747380518, guid: a3380400dc3f73745afd925994fe784e,
-    type: 3}
 --- !u!4 &604905983
 Transform:
   m_ObjectHideFlags: 0
@@ -2670,7 +2668,7 @@ MonoBehaviour:
   m_Text: 'You''ve passed GO
 
 
-    $200 have been credited to your account'
+    $150 have been credited to your account'
 --- !u!222 &1633953423
 CanvasRenderer:
   m_ObjectHideFlags: 0
