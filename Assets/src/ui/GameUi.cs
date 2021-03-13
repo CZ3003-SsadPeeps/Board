@@ -18,12 +18,12 @@ public class GameUi : MonoBehaviour
     public Button rollDiceButton, endTurnButton, leaderboardButton, homeButton;
     public Text endGameText;
     public Image endGameBackground;
-    public GameObject passedGoPopup, PlayerCardSmallPrefab, PlayerCardBigPrefab;
+    public PlayerCardBig bigPlayerCard;
+    public GameObject passedGoPopup, PlayerCardSmallPrefab;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
     GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
     List<PlayerCardSmall> smallPlayerCards = new List<PlayerCardSmall>(4);
-    List<PlayerCardBig> bigPlayerCards = new List<PlayerCardBig>(4);
 
     bool shouldUpdateStock = false;
 
@@ -44,7 +44,6 @@ public class GameUi : MonoBehaviour
         int currentPlayerCredit = GameStore.CurrentPlayer.Credit;
         smallPlayerCards[GameStore.CurrentPlayerPos].SetCredit(currentPlayerCredit);
 
-        PlayerCardBig bigPlayerCard = bigPlayerCards[GameStore.CurrentPlayerPos];
         bigPlayerCard.SetCredit(currentPlayerCredit);
         // This operation is pretty expensive, so will only be done when while user is in stock market UI
         if (shouldUpdateStock)
@@ -63,7 +62,7 @@ public class GameUi : MonoBehaviour
     {
         if (board.HasReachedMaxLaps())
         {
-            bigPlayerCards[GameStore.CurrentPlayerPos].SetVisible(false);
+            bigPlayerCard.SetVisible(false);
 
             for (int i = 0; i < smallPlayerCards.Count; i++)
             {
@@ -120,17 +119,13 @@ public class GameUi : MonoBehaviour
     void LoadCurrentPlayerDetails()
     {
         Player currentPlayer = GameStore.CurrentPlayer;
+        List<PlayerStock> stocks = controller.GetPlayerStocks();
         Debug.Log($"Player[{currentPlayer.Name}, ${currentPlayer.Credit}]");
 
         smallPlayerCards[GameStore.PrevPlayerPos].SetSelected(false);
-        bigPlayerCards[GameStore.PrevPlayerPos].SetVisible(false);
-
         smallPlayerCards[GameStore.CurrentPlayerPos].SetSelected(true);
-        PlayerCardBig bigPlayerCard = bigPlayerCards[GameStore.CurrentPlayerPos];
-        bigPlayerCard.SetVisible(true);
 
-        // Ensures user has the latest stock prices
-        List<PlayerStock> stocks = controller.GetPlayerStocks();
+        bigPlayerCard.SetPlayerDetails(currentPlayer, CARD_COLORS[GameStore.CurrentPlayerPos]);
         bigPlayerCard.SetStockDetails(stocks);
 
         // Select player's piece
@@ -213,10 +208,9 @@ public class GameUi : MonoBehaviour
 
     void GeneratePlayerCards()
     {
-        Player player;
         GameObject cardObject;
+        Player player;
         PlayerCardSmall smallPlayerCard;
-        PlayerCardBig bigPlayerCard;
         for (int i = 0; i < GameStore.Players.Length; i++)
         {
             player = GameStore.Players[i];
@@ -229,17 +223,6 @@ public class GameUi : MonoBehaviour
             smallPlayerCard.SetPosition(new Vector3(-400f, -90 * (i + 1), 0f));
             smallPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
             smallPlayerCards.Add(smallPlayerCard);
-
-            // Create big player card
-            cardObject = Instantiate(PlayerCardBigPrefab);
-            cardObject.transform.SetParent(canvas.transform, false);
-            cardObject.SetActive(false);
-
-            List<PlayerStock> stocks = controller.GetPlayerStocks();
-            bigPlayerCard = cardObject.GetComponent<PlayerCardBig>();
-            bigPlayerCard.SetPlayerDetails(player, CARD_COLORS[i]);
-            bigPlayerCard.SetStockDetails(stocks);
-            bigPlayerCards.Add(bigPlayerCard);
         }
     }
 
