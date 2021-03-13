@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d00b129d6b9bb24aae9ac86ee1c9b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credits: {fileID: 3413886390354629290}
-  playerNameText: {fileID: 6173360057830418451}
+  nameText: {fileID: 6173360057830418451}
+  creditText: {fileID: 3413886390354629290}
   cardBackground: {fileID: 6866349766630958494}
   selectionBackground: {fileID: 8547176138806911799}
 --- !u!1 &6498523557717546266

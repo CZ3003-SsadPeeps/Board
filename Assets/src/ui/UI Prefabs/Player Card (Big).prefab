@@ -168,8 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d9e4d97ef0d754c9ebd536ca5f142c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNameText: {fileID: 1880976816867798902}
-  playerCreditText: {fileID: 169990741102283898}
+  nameText: {fileID: 1880976816867798902}
+  creditText: {fileID: 169990741102283898}
+  cardBackground: {fileID: 2925629804747380516}
   scrollView: {fileID: 2925629806236768057}
   TextPrefab: {fileID: 6019263639368663799, guid: 9e56d952e69aa9c4bb298d72b823de03,
     type: 3}

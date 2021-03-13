@@ -1,18 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
-public class PlayerCardSmall : MonoBehaviour
+public class PlayerCardSmall : PlayerCard
 {
-    public Text credits;
-    public Text playerNameText;
-    public Image cardBackground, selectionBackground;
-
-    internal void SetPlayerDetails(Player player, Color32 backgroundColor)
-    {
-        playerNameText.text = player.Name;
-        credits.text = $"${player.Credit}";
-        cardBackground.color = backgroundColor;
-    }
+    public Image selectionBackground;
 
     internal void SetSelected(bool isSelected)
     {
