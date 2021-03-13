@@ -28,7 +28,7 @@ public class GameUi : MonoBehaviour
     void Start()
     {
         // Uncomment when testing Game UI only
-        //GameStore.InitPlayers(new string[] { "Abu", "Banana", "Cherry", "Mewtwo" });
+        GameStore.InitPlayers(new string[] { "Abu", "Banana", "Cherry", "Mewtwo" });
         GeneratePlayerCards();
 
         // Ensures popup is displayed on top of everything else. Must be done after player cards are generated
@@ -117,6 +117,7 @@ public class GameUi : MonoBehaviour
         listPlayerCardsBig[GameStore.CurrentPlayerPos].SetActive(true);
         List<PlayerStock> stocks = controller.GetPlayerStocks();
         PlayerCardBig playerCard = listPlayerCardsBig[GameStore.CurrentPlayerPos].GetComponent<PlayerCardBig>();
+        playerCard.SetPlayerCredit(currentPlayer.Credit);
         playerCard.SetStockDetails(stocks);
 
         // Select player's piece

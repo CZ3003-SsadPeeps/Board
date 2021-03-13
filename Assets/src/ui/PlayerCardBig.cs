@@ -4,10 +4,15 @@ using UnityEngine.UI;
 
 public class PlayerCardBig : MonoBehaviour
 {
-    public Text playerNameText;
+    public Text playerNameText, playerCreditText;
     public ScrollRect scrollView;
     public GameObject TextPrefab;
     public Transform content;
+
+    internal void SetPlayerCredit(int credit)
+    {
+        playerCreditText.text = $"${credit}";
+    }
 
     internal void SetPlayerName(string name)
     {
