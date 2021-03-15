@@ -22,7 +22,7 @@ namespace Database
                 KEY_PlayerID + " INTEGER PRIMARY KEY," +
                 KEY_Name + " TEXT NOT NULL, " +
                 KEY_DateAchieved + " INTEGER NOT NULL, " +
-                KEY_CreditEarned + " REAL NOT NULL)";
+                KEY_CreditEarned + " INTEGER NOT NULL)";
             dbcmd.ExecuteNonQuery();
         }
 
@@ -43,7 +43,6 @@ namespace Database
                 + player.DateAchieved + "', '"
                 + player.CreditEarned + "' )";
             dbcmd.ExecuteNonQuery();
-
         }
 
         public List<PlayerRecord> getDataByString(string str)
