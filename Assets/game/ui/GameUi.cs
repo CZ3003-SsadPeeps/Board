@@ -108,6 +108,7 @@ public class GameUi : MonoBehaviour
     public void ShowLeaderBoard()
     {
         // TODO: Show leaderboard UI
+        SceneManager.LoadScene("Leaderboard");
         Debug.Log("Launching leaderboard Ui...");
     }
 

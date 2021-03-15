@@ -90,12 +90,21 @@ namespace Database
             return convertToList(reader);
         }
 
+        public List<PlayerRecord> RetrieveTop30PlayerRecords()
+        {
+            IDbCommand dbcmd = getDbCommand();
+            dbcmd.CommandText =
+                "SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_CreditEarned + " DESC LIMIT 30";
+            System.Data.IDataReader reader = dbcmd.ExecuteReader();
+            return convertToList(reader);
+        }
+
         public List<PlayerRecord> convertToList(IDataReader reader)
         {
             List<PlayerRecord> res = new List<PlayerRecord>();
             while (reader.Read())
             {
-                res.Add(new PlayerRecord(Convert.ToInt32(reader[0]), reader[1].ToString(), Convert.ToInt32((string) reader[3]), (long)reader[2]));
+                res.Add(new PlayerRecord(Convert.ToInt32(reader[0]), reader[1].ToString(), Convert.ToInt32(reader[3]), (long)reader[2]));
             }
             return res;
         }
