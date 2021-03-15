@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Database;
 
 public class GameUi : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class GameUi : MonoBehaviour
     public GameObject passedGoPopup, PlayerCardSmallPrefab;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
-    GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAOTest());
+    GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAO());
     List<PlayerCardSmall> smallPlayerCards = new List<PlayerCardSmall>(4);
 
     bool shouldUpdateStock = false;
