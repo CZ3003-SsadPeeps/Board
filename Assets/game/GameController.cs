@@ -47,7 +47,9 @@ class GameController
         for (int i = 0; i < records.Length; i++)
         {
             player = GameStore.Players[i];
-            records[i] = new PlayerRecord(player.Name, player.Credit, (long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds);
+
+            //needs to add playerID
+            records[i] = new PlayerRecord(1,player.Name, player.Credit, (long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds);
         }
 
         Debug.Log("Storing credits to database...");
