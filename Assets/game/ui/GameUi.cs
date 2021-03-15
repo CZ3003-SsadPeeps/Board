@@ -23,7 +23,7 @@ public class GameUi : MonoBehaviour
     public GameObject passedGoPopup, PlayerCardSmallPrefab;
 
     // TODO: Replace with actual StockTrader & PlayerRecordDAO classes from stock system
-    GameController controller = new GameController(new StockTraderTest(), new PlayerRecordDAO());
+    GameController controller;
     List<PlayerCardSmall> smallPlayerCards = new List<PlayerCardSmall>(4);
 
     bool shouldUpdateStock = false;
@@ -32,6 +32,8 @@ public class GameUi : MonoBehaviour
     {
         // Uncomment when testing Game UI only
         //GameStore.InitPlayers(new string[] { "Abu", "Banana", "Cherry", "Mewtwo" });
+
+        controller = new GameController(new StockTraderTest(), new PlayerRecordDAO());
         GeneratePlayerCards();
 
         // Ensures popup is displayed on top of everything else. Must be done after player cards are generated
