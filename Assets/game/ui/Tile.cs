@@ -31,14 +31,17 @@ public class Tile : MonoBehaviour
             // Account for possible collision with other pieces on the tile
             switch (i)
             {
-                case 1:
+                case 0:
                     pos.Set(pos.x + 0.2f, 0, pos.z + 0.2f);
                     break;
-                case 2:
+                case 1:
                     pos.Set(pos.x + 0.2f, 0, pos.z - 0.2f);
                     break;
-                default:
+                case 2:
                     pos.Set(pos.x - 0.2f, 0, pos.z + 0.2f);
+                    break;
+                default:
+                    pos.Set(pos.x - 0.2f, 0, pos.z - 0.2f);
                     break;
             }
 
